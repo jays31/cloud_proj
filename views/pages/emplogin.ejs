@@ -89,20 +89,14 @@ function fetch_salary(){
                 <p class="card-text">Fill up the form for employer to provide confirmation</p>
                 
                 <div class="input-group">
-                    <input type="text" name="empid" id="empid" placeholder="Employee ID" class="form-control" required>
+                    <input type="email" name="emplogin" id="emplogin" placeholder="Employee Email" class="form-control" required>
                   </div><br>
 
                 <div class="input-group">
-                  <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
+                  <input type="password" name="emppwd" id="emppwd" placeholder="Password" class="form-control" required>
                 </div><br>
-                
-                <div class="input-group">
-                  <input type="text" name="refID" id="refID" placeholder="Brokers Reference ID" class="form-control" required>
-                </div><br>
-                <div class="input-group">
-                    <input type="text" name="brokerURL" id="refbrokerURLID" placeholder="Brokers URL" class="form-control" required>
-                  </div><br>
-                <button class="btn btn-success" id="checkMortStatus" type="submit" onclick='fetch_salary()'>Submit</button>
+
+                <button class="btn btn-success" id="checkMortStatus" type="submit">Submit</button>
               </div>
               <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
             </div>
