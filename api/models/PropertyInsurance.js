@@ -12,6 +12,26 @@ module.exports = {
       type: 'string',
       required: true
     },
+    insuranceQuote:{
+      type: 'number',
+      required:true
+    },
+    mortId:{
+      type: 'string',
+      required:true
+    },
+    insuredValue : {
+      type: 'number',
+      required:true
+    },
+    deductibleValue : {
+      type: 'number',
+      required:true
+    },
+    insReqName: {
+      type: 'number',
+      required:true
+    },
   },
 
 };
