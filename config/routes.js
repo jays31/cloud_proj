@@ -25,9 +25,9 @@ module.exports.routes = {
   '/emp/empconfirmation': { view: 'pages/emp/empconfirmation'},
   '/emp/login': { view: 'pages/emp/emplogin'},
   '/realestate/appraisalrequest': { view: 'pages/realestate/appraisalrequest'},
-  '/realestate/rehome': {view: 'pages//realestate/rehome'},
-  '/realestate/relogin': {view: 'pages//realestate/relogin'},
-  '/realestate/appraisalinfo': {view: 'pages//realestate/appraisalinfo'},
+  '/realestate/rehome': {view: 'pages/realestate/rehome'},
+  '/realestate/relogin': {view: 'pages/realestate/relogin'},
+  '/realestate/appraisalinfo': {view: 'pages/realestate/appraisalinfo'},
 
 
   /***************************************************************************
