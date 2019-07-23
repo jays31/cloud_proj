@@ -104,59 +104,31 @@
   <body>
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand " href="/">Warrior Mortgage</a>
-      <a class="navbar-brand " href="/login">Login</a>
     </nav>
     <br>
     <div class="bg">
     <div class="container">
       <div class="row">
-
-        <div class="col-sm-6">
-          <form id="dataform" onkeydown="return event.key != 'Enter';">
-            <div class="card text-center">
-              <div class="card-body">
-                <h5 class="card-title">Loan Aplication Form</h5>
-                <p class="card-text">Fill up all the mandatory fields to get a line of credit approved.</p>
-                
-                <div class="input-group">
-                  <input type="text" name="uname" id="uname" placeholder="User Name" class="form-control" required/>&ensp;&ensp;
-                  <input type="password" name="pwd" id="pwd" placeholder="Password" class="form-control" required/>
-                </div><br>
-
-                <div class="input-group">
-                  <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" required/>&ensp;&ensp;
-                  <input type="text" name="lname" id="lname" placeholder="Last Name" class="form-control" required/>
-                </div><br>
-                
-                <div class="input-group">
-                  <input type="text" name="address" id="address" placeholder="Current living Address" class="form-control" required/>
-                </div><br>
-
-                <div class="input-group">
-                  <input type="text" name="cname" id="cname" placeholder="Current Employer Name" class="form-control" required/>
-                </div><br>
-                
-                <div class="input-group">
-                  <input type="email" name="email" id="email" placeholder="Company Email" class="form-control" required/>
-                </div><br>
-
-                <div class="input-group">
-                  <input type="number" min="1000000000" max="9999999999" step="1" name="phone" id="phone" placeholder="Phone Number" class="form-control" required/>
-                </div><br>
-
-
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <button class="btn btn-dark" type="button" disabled>CA $</button>
+            <div class="col-sm-6">
+                    <form onkeydown="return event.key != 'Enter';">
+                      <div class="card text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">Loan Status Check</h5>
+                          <p class="card-text">Enter your unique reference number provider on the aplication submission</p>
+                          <div class="input-group">
+                            <input type="text" name="wref" id="wref" placeholder="Loan Reference #ID" class="form-control" required/>
+                          </div><br>
+                        </div>
+                        <div id="modstatus" class="card-footer text-muted"> 
+                                <button class="btn btn-success" id="checkMortStatus" type="button" onclick='stat()'>Submit</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                  <input type="number" step="1" min="1" name="mortgage" id="mortgage" placeholder="Mortgage Amount Requested" class="form-control" required/>
-                </div><br>
-                
-                <button class="btn btn-success" id="apply4Mortgage" type="button">Submit</button>
+                </div>
               </div>
-              <div class="card-footer text-muted"><a id="feedback"></a></div>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             </div>
-          </form>
-        </div>
+    
 </body>
 </html>
