@@ -48,7 +48,7 @@ module.exports = {
       type: 'string',
       required: true
     },
-    referenceNumber:{
+    mortId:{
       type: 'string',
       required:true
     },
