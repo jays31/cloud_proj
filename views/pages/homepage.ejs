@@ -151,10 +151,13 @@
                   </div>
                   <input type="number" step="1" min="1" name="mortgage" id="mortgage" placeholder="Mortgage Amount Requested" class="form-control" required/>
                 </div><br>
-                
-                <button class="btn btn-success" id="apply4Mortgage" type="button">Submit</button>
+                <div class="input-group">
+                    <input type="number" step="1" min="1" name="mls_id" id="mls_id" placeholder="MLs_ID" class="form-control" required/>
+                  </div><br>
               </div>
-              <div class="card-footer text-muted"><a id="feedback"></a></div>
+              <div class="card-footer text-muted">
+                <button class="btn btn-success" id="apply4Mortgage" type="submit">Submit</button>
+              </div>
             </div>
           </form>
         </div>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Employer Inc. | Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+  <style>
+    .headstyle{
+      background-color: rgb(177,194,204);
+      height: 120px
+    }
+    .col-sm-6
+      {
+        margin: 0 auto;
+        float : none;
+      }
+    .colo{
+      background-color: rgb(19,68,120);
+    }
+    .centerali{
+      text-align: center;
+      margin-top: -5px
+    }
+    .display-2{
+      text-align: center;
+    }
+  </style>
+
+  <script>
+function fetch_salary(){
+      var email=$("#email").val();
+      var mortId=$("#refID").val();
+      var salary;
+      var request = new XMLHttpRequest();
+      request.open('GET','',false);
+      request.onload = function(){
+        var data = JSON.parse(this.response);
+         data.forEach(element => {
+           salary = element.salary;
+         });
+        }
+        if(salary>=50000)
+        {
+        var request2 = new XMLHttpRequest();
+        request2.open('PUT','',false);
+        request2.send();
+        }else{
+        var request2 = new XMLHttpRequest();
+        request2.open('PUT','',false);
+        request2.send();
+        }
+      request.send();
+      }
+
+  </script>
+</head>
+<body style="background-color: lightgray">
+
+<nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
+  <a class="navbar-brand" href="/emp/login" style="color: white">Employer Inc.</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<br>
+
+<div class="headstyle">
+  <br>
+  <br>
+  <h3 class="centerali"> <strong> Mortgage Application Form </strong></h3>
+  <h5 class="centerali">In association with <strong>Warrior Mortgage Inc.<sup>TM</sup></strong></h5>
+</div>
+
+<div class ="centerali">
+  <br>
+      <div class="container">
+      <div class="row">
+
+        <div class="col-sm-6">
+          <form>
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">Loan Confirmation Form</h5>
+                <p class="card-text">Fill up the form for employer to provide confirmation</p>
+                
+                <div class="input-group">
+                    <input type="text" name="empid" id="empid" placeholder="Employee ID" class="form-control" required>
+                  </div><br>
+
+                <div class="input-group">
+                  <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
+                </div><br>
+                
+                <div class="input-group">
+                  <input type="text" name="refID" id="refID" placeholder="Brokers Reference ID" class="form-control" required>
+                </div><br>
+                <div class="input-group">
+                    <input type="text" name="brokerURL" id="refbrokerURLID" placeholder="Brokers URL" class="form-control" required>
+                  </div><br>
+                <button class="btn btn-success" id="checkMortStatus" type="button" onclick='fetch_salary()'>Submit</button>
+              </div>
+              <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
+            </div>
+          </form>
+        </div>
+</div>
+</body>
+</html>
