@@ -65,36 +65,6 @@
         });
       </script>
 
-script>
-$(document).ready(function(){
-  $("button").click(function(){
-    $("#calBMI").empty()
-    var form_studentID=$("#stuID").val();
-    var form_firstname=$("#fName").val();
-
-      var form_lastname=$("#lName").val();
-    var form_period=$("#period").val();
-    var form_programID=$("#programID").val();
-    
-
-    $.post("http://localhost:1337/StudentController/createStudent_805",
-    {
-      submitted_studentID: form_studentID,
-      submitted_firstname: form_firstname,
-      submitted_lastname: form_lastname,
-      submitted_period: form_period,
-      submitted_programID: form_programID
-    },
-    function(data, status){
-      $("#feedback").append("Registration was "+ data['regSuccess']);
-      $("#dataform")[0].reset();
-      
-    });
-  });
-});
-</script>
-
-
   </head>
 
   <body>
