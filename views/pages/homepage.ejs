@@ -39,31 +39,16 @@
 
 <script>
 
-  function stat(){
-        var id=$("#wref").val();
-        var request = new XMLHttpRequest()
-        request.open('GET','',true)
-        request.onload = function(){
-          var data = JSON.parse(this.response)
-          if(!$.trim(data)){
-            $("#modstatus").html("Mortgage ID does not exist!");
-          }
-          else{
-            data.forEach(element =>{
-              $("#modstatus").html("Mortgage ID: "+ element.id + "&ensp;&ensp; Status: " + element.status);
-            });
-          }
-        }
-        request.send()
-  }
-
   $(document).ready(function(){
     $("#apply4Mortgage").click(function(){
 
       if($(("#mortgage"==null)||("#fname"==null)||("#lname"==null)||("#address"==null)||("#cname"==null)||("#email"==null)||("#phone"===null))){
         $("#feedback").html("Incomplete form!");
+        console.log("invalid");
       }
 
+      var form_username = $("#uname").val();
+      var form_password = $("#pwd").val();
       var form_firstname=$("#fname").val();
       var form_lastname=$("#lname").val();
       var form_address=$("#address").val();
@@ -71,25 +56,32 @@
       var form_email=$("#email").val();
       var form_phone=$("#phone").val();
       var form_amount=$("#mortgage").val();
+      var form_mlsId=$("#mls_id").val();
         
-      $.post("",{
+      $.post("http://localhost:1337/BrokerMortgageController/createMortgageRequest",{
+        submitted_username:form_username,
+        submitted_password:form_password,
         submitted_firstname: form_firstname,
         submitted_lastname: form_lastname,
         submitted_address: form_address,
         submitted_employer:form_employer,
         submitted_email: form_email,
         submitted_pnumber: form_phone,
-        submitted_amount: form_amount
+        submitted_amount: form_amount,
+        submitted_mlsId:form_mlsId,
       },
 
       function(data, status){
+        console.log("Test...........");
         $("#feedback").html(data['regSuccess']);
+        console.log("Test...........");
         var request = new XMLHttpRequest()
-        request.open('GET',''+form_email,true)
+        request.open('GET','http://localhost:1337/BrokerMortgage/find?employeeEmail='+form_email,true)
         request.onload = function(){
           var data = JSON.parse(this.response)
           data.forEach(element => {
-            $("#modstatus").html("Mortgage ID: "+ element.id + "&ensp;&ensp; Status: " + element.status);
+            console.log("Test2...........");
+            $("#feedback").html("Mortgage ID: "+ element.id + "&ensp;&ensp; Status: " + element.mortgageStatus);
           });
         }
         request.send()

@@ -49,8 +49,7 @@ module.exports = {
       required: true
     },
     mortId:{
-      type: 'string',
-      required:true
+      type: 'string'
     },
     mortgageStatus: {
       type: 'string'
