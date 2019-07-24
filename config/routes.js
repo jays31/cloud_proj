@@ -29,8 +29,8 @@ module.exports.routes = {
   '/realestate/relogin': { view: 'pages/realestate/relogin'},
   '/realestate/appraisalinfo': { view: 'pages/realestate/appraisalinfo'},
   '/insurance/home': { view: 'pages/insurance/insurancehome'},
-  '/BrokerMortgageController/createMortgageRequest' : 'BrokerMortgageController.createMortgageRequest'
-
+  '/BrokerMortgageController/createMortgageRequest' : 'BrokerMortgageController.createMortgageRequest',
+  '/EmployerController/userLogin_805': 'EmployerController.userLogin_805',
 
   /***************************************************************************
   *                                                                          *
