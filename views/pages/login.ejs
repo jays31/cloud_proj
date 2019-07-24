@@ -35,6 +35,34 @@
         margin: 0 auto;
       }
     </style>
+      <script type="text/javascript">
+        $(document).ready(function () {
+          $("#mortgageLogin").click(function () {
+            var username = $("#user_id").val();
+            var password = $("#user_pass").val();
+            $.ajax({
+              url: 'http://localhost:1337/BrokerMortgage/find',
+              method: 'GET',
+              data: {
+                userName: username,
+                password: password
+              },
+              dataType: 'json',
+              success: function (response) {
+                if (null != response && response.length > 0) {
+                  window.location = "http://localhost:1337/status";
+                } else {
+                  alert('Invalid Login');
+                }
+              },
+              error: function (err) {
+                console.log("Please check your input");
+                alert('Please check your input...');
+              }
+            });
+          });
+        });
+      </script>
 
   </head>
 
