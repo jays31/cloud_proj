@@ -41,10 +41,8 @@
 
   $(document).ready(function(){
     $("#apply4Mortgage").click(function(){
-
       if($(("#mortgage"==null)||("#fname"==null)||("#lname"==null)||("#address"==null)||("#cname"==null)||("#email"==null)||("#phone"===null))){
         $("#feedback").html("Incomplete form!");
-        console.log("invalid");
       }
 
       var form_username = $("#uname").val();
@@ -68,20 +66,17 @@
         submitted_email: form_email,
         submitted_pnumber: form_phone,
         submitted_amount: form_amount,
-        submitted_mlsId:form_mlsId,
+        submitted_mlsId:form_mlsId
       },
 
       function(data, status){
-        console.log("Test...........");
-        $("#feedback").html(data['regSuccess']);
-        console.log("Test...........");
+        var appStatus = data['regSuccess'];
         var request = new XMLHttpRequest()
         request.open('GET','http://localhost:1337/BrokerMortgage/find?employeeEmail='+form_email,true)
         request.onload = function(){
-          var data = JSON.parse(this.response)
+          var data = JSON.parse(this.response)  
           data.forEach(element => {
-            console.log("Test2...........");
-            $("#feedback").html("Mortgage ID: "+ element.id + "&ensp;&ensp; Status: " + element.mortgageStatus);
+            $("#feedback").html(appStatus+"<br>"+"Mortgage ID: "+ element.id + "<br>"+"Status: " + element.mortgageStatus);
           });
         }
         request.send()
@@ -148,8 +143,9 @@
                   </div><br>
               </div>
               <div class="card-footer text-muted">
-                <button class="btn btn-success" id="apply4Mortgage" type="submit">Submit</button>
+                <button class="btn btn-success" id="apply4Mortgage" type="button" >Submit</button>
               </div>
+              <div class="card-footer text-muted"><a id="feedback"></a></div>
             </div>
           </form>
         </div>
