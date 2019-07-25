@@ -22,20 +22,20 @@ module.exports = {
     },
   
     findrecord: function(req,res){
-        var mlsId = req.body.incmlsid;
         var mortId = req.body.incmortid;
-        Insurance.find().where({ins_MlsID:mlsId,ins_MortID:mortId}).exec(function (err, Insurance) {
+        Insurance.find().where({ins_MortID:mortId}).exec(function (err, Insurance) {
             if (err) {
                 sails.log("ended in error");
       
               res.send( { error: true });
             }
             const Record = Insurance[0];
+            console.log(Record)
             if (Insurance.length===0) {
                 res.send({Success: false });
             }
             else{
-                res.send({ Success: true});
+                res.send({ Success: true, Record});
             }
     });
   

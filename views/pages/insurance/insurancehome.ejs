@@ -24,19 +24,19 @@
 
   $(document).ready(function(){
   $("#incFindMort").on('click',   function (e) {
-    // alert ("button was clicked");
+     //alert ("button was clicked");
      
-          var incmlsid=$("#incmlsid").val();
           var incmortid=$("#incmortid").val();
           $.ajax({
          
             url:"http://localhost:1337/InsuranceController/findrecord",
             type: 'POST',
-            data: {ins_MlsID:incmlsid, ins_MortID:incmortid},
+            data: {ins_MortID:incmortid},
             success: function (data) {
+              //console.log(data)
               if (data.Success) {
 
-               window.location = "http://localhost:1337/insurance/info";
+               //window.location = "http://localhost:1337/insurance/info";
   
               }
               else {
@@ -77,10 +77,6 @@
                 <div class="card-body">
                   <h5 class="card-title">Insurance</h5>
                   <p class="card-text">Insurance</p>
-                  
-                  <div class="input-group">
-                      <input type="text" name="incmlsid" id="incmlsid" placeholder="MLSs ID" class="form-control" required>
-                  </div><br>
   
                   <div class="input-group">
                       <input type="text" name="incmortid" id="incmortid" placeholder="Mortgage ID" class="form-control" required>
