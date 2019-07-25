@@ -39,6 +39,26 @@ module.exports = {
             }
     });
   
+    },
+
+    updateInsurance:function(req,res)
+    {
+        //var mlsid = req.body.submitted_mlsid;
+        var mortid = req.body.submitted_mortid;       
+        var firstName = req.body.submitted_firstname;
+        var lastName = req.body.submitted_lastname;
+        //var appraisval = req.body.submitted_appvalue;
+        var incval = req.body.submitted_incvalue;
+        var deduval = req.body.submitted_deduvalue
+         
+        Insurance.update({ins_MortID:mortid}).set({firstname:firstName,lastname:lastName,insured_value: incval, deductible_value: deduval }).exec(function(err){
+            if (err) {
+                sails.log("could not update record");
+            }
+            sails.log("updated successfully");
+            res.send({Success:true});
+        });
+     
     }
 };
 

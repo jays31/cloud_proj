@@ -56,10 +56,19 @@ module.exports = {
             sails.log("updated successfully");
         });
         //BrokerMortgage.query('update BrokerMortgage set BrokerMortgage.salary='+ salary+', BrokerMortgage.employed_date='+employed_date+', BrokerMortgage.employerConfirmationStatus='+employerConfirmationStatus+'');
+      },
 
-    
-        
-       
+      updateBrokerINC : function (req, res) {
+        var mortId = req.body.mortId;
+        var IncStatus = req.body.incstatus;
+      
+        BrokerMortgage.update({id:mortId}).set({insuranceStatus:IncStatus}).exec (function(err){
+            if (err) {
+                sails.log("could not update record");
+            }
+
+            sails.log("updated successfully");
+        });
       },
 };
 

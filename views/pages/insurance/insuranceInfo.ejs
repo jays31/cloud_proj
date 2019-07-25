@@ -20,6 +20,50 @@
     }
   </style>
 
+
+<script>
+
+    $(document).ready(function(){
+      $("#updateInsurance").click(function(){
+  
+        var incmlsid = $("#incmlsid").val();
+        var icmortid = $("#icmortid").val();
+        var custFname=$("#custFname").val();
+        var custLname=$("#custLname").val();
+        var appraisalval=$("#appraisalval").val();
+        var insuredValue=$("#insuredValue").val();
+        var deductibleValue=$("#deductibleValue").val();
+          
+        $.post("http://localhost:1337/InsuranceController/updateInsurance",{
+          submitted_mlsid:incmlsid,
+          submitted_mortid:icmortid,
+          submitted_firstname: custFname,
+          submitted_lastname: custLname,
+          submitted_appvalue: appraisalval,
+          submitted_incvalue:insuredValue,
+          submitted_deduvalue: deductibleValue,
+        },
+  
+        function(data, status){
+          if(data.Success)
+          {
+            $.ajax({
+            url:"http://localhost:1337/BrokerMortgageController/updateBrokerINC",
+            type: 'POST',
+            data: {mortId:icmortid,incstatus:'Approved'}
+              } );
+          }
+        else {
+         alert ("There was an issue updating the appraisal value, contact the system admin");
+           }
+        });
+      });
+    });
+    
+    </script>
+
+
+
 </head>
 <body style="background-color: rgb(245, 255, 248)">
 
@@ -44,28 +88,28 @@
                 <p class="card-text">Insurance</p>
                 
                 <div class="input-group">
-                    <input type="text" name="remlsid" id="remlsid" placeholder="MLSs ID" disabled class="form-control" required>
+                    <input type="text" name="incmlsid" id="incmlsid" placeholder="MLSs ID" required class="form-control" required>
                 </div><br>
 
                 <div class="input-group">
-                    <input type="text" name="remortid" id="remortid" placeholder="Mortgage ID" disabled class="form-control" required>
+                    <input type="text" name="icmortid" id="incmortid" placeholder="Mortgage ID" required  class="form-control" required>
                 </div><br>
                 <div class="input-group">
-                    <input type="text" name="custFname" id="custFname" placeholder="First Name"  class="form-control">
+                    <input type="text" name="custFname" id="custFname" placeholder="First Name" required  class="form-control">
                 </div><br>
                 <div class="input-group">
-                    <input type="text" name="custLname" id="custLname" placeholder="Last Name" class="form-control" >
+                    <input type="text" name="custLname" id="custLname" placeholder="Last Name" required class="form-control" >
                 </div><br>
                 <div class="input-group">
-                    <input type="number" name="appraisalval" id="appraisalval" placeholder="Appraisal Value" disabled class="form-control"/>
+                    <input type="number" name="appraisalval" id="appraisalval" placeholder="Appraisal Value" required class="form-control"/>
                 </div><br>
                 <div class="input-group">
                     <input type="number" step="1" min="1" name="insuredValue" id="insuredValue" placeholder="Insured Value" required class="form-control"/>
                 </div><br>
                 <div class="input-group">
-                    <input type="number" step="1" min="1" name="deductibleValue" id="insuredValue" placeholder="Deductible Value" required class="form-control"/>
+                    <input type="number" step="1" min="1" name="deductibleValue" id="deductibleValue" placeholder="Deductible Value" required class="form-control"/>
                 </div><br>
-                <button class="btn btn-success" id="checkMortStatus" type="submit">Submit</button>
+                <button class="btn btn-success" id="updateInsurance" type="button">Submit</button>
             </div>
             <div class="card-footer text-muted"><strong>© Insurance Inc. 2019</div>
           </div>

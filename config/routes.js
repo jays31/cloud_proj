@@ -38,6 +38,9 @@ module.exports.routes = {
   '/InsuranceController/insertAppraisalVal_Ins':'InsuranceController.insertAppraisalVal_Ins',
   '/insurance/info': { view: 'pages/insurance/insuranceInfo'},
   '/InsuranceController/findrecord' : 'InsuranceController.findrecord',
+  '/InsuranceController/updateInsurance' : 'InsuranceController.updateInsurance',
+  '/BrokerMortgageController/updateBrokerINC' : 'BrokerMortgageController.updateBrokerINC',
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
