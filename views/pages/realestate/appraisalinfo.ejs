@@ -42,6 +42,18 @@
                   if (data.Success) {
                     $("#feedback").append("Appraisal value updated to "+ appraisalvalInput);
 
+                    $.ajax({
+            
+                        url:"http://localhost:1337/InsuranceController/updateAppraisalVal_Ins",
+                    type: 'post',
+                    data: {mortId:mortId, employee_salary:employee_salary,employeestartdate:employeestartdate, approvalStatus:approvalStatus}
+
+
+                      } );
+
+                      alert ("Approval request submitted");
+                      $("#approvalRequestForm").empty();
+
 
           
                   
