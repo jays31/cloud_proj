@@ -44,15 +44,15 @@
 
                     $.ajax({
             
-                        url:"http://localhost:1337/InsuranceController/updateAppraisalVal_Ins",
+                        url:"http://localhost:1337/InsuranceController/insertAppraisalVal_Ins",
                     type: 'post',
-                    data: {mortId:mortId, employee_salary:employee_salary,employeestartdate:employeestartdate, approvalStatus:approvalStatus}
+                    data: {reMIsID:reMIsID, reMortID:reMortID, appraisalvalInput:appraisalvalInput}
 
 
                       } );
 
                       alert ("Approval request submitted");
-                      $("#approvalRequestForm").empty();
+                      $("#approvalRequestForm")[0].reset();
 
 
           

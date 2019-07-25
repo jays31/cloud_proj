@@ -6,20 +6,19 @@
  */
 
 module.exports = {
-    updateAppraisalVal_Ins: function (req, res) {        
-        var mlsId = req.body.reMIsID;
-        var incomingAppraisalval = req.body.appraisalvalInput;
-        
-         
-        RErealestate.update({mlsId:mlsId}).set({appraisalValue:incomingAppraisalval }).exec (function(err){
-            if (err) {
-                sails.log("could not update record");
-            }
+    insertAppraisalVal_Ins: function (req, res) { 
+        var ins_MortID = req.body.reMortID;
+        var ins_MlSID = req.body.reMIsID;
+        var incomingAppraisalval = req.body.appraisalvalInput;       
 
-            sails.log("Updated successfully");
-            res.send({Success:true, Message:"updated successfully"});
+        Insurance.create({ ins_MortID:ins_MortID, ins_MlSID:ins_MlSID, ins_appraisalValue: incomingAppraisalval}).exec(
+        function (err){
+            if (err) { 
+                res.send( { error: "Database Error: Could not insert into table" }); 
+            }
+            res.send({ regSuccess: "Application was submitted successfully!"});
+            sails.log("record inserted successfully");
         });
-       
     },
   
 

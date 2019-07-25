@@ -11,23 +11,29 @@ module.exports = {
 
     firstname : {
       type: 'string',
-      required:true
+      required:false
     },
     lastname: {
       type: 'string',
-      required:true
+      required:false
     },
     
-    ins_MlsID:{
-      type: 'number',
-      required:true
-    },
-
     ins_MortID: {
       type: 'number',
       required:false
     },
-    
+
+    ins_MlSID: {
+      type: 'number',
+      required:false
+    },
+
+
+    ins_appraisalValue: {
+      type: 'number',
+      required:false
+    },
+
     insured_value:{
       type: 'number',
       required:false

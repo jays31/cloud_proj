@@ -1,7 +1,7 @@
 module.exports.datastores = {
 
   default: {
-    adapter: 'sails-mysql',
+    // adapter: 'sails-mysql',
     // host: "localhost",
     // port: 3306,
     // user: "root",
