@@ -19,6 +19,34 @@
       background-color: rgb(186, 58, 75);
     }
   </style>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#login").click(function(){
+            var username=$("#re_email").val();
+            var password=$("#re_pwd").val();
+            $.ajax({
+            url:'http://localhost:1337/re_users/find',
+            method: 'GET',
+            data: {reEmail: username,rePassword:password},
+            dataType: 'json',
+            success: function(response){
+              if(null!=response && response.length>0){
+                console.log("Login Successful");
+                window.location = "http://localhost:1337/realestate/appraisalinfo";
+              }
+              else{
+                console.log("Invalid Login");
+                alert('Invalid Login');
+              }
+            },
+            error: function(err){
+              console.log("Please check your input");
+              alert('Please check your input...');
+            }
+          });
+      });
+    });
+      </script>
 
 </head>
 <body style="background-color: rgb(255, 245, 247)">
@@ -48,7 +76,7 @@
                   <div class="input-group">
                         <input type="password" name="re_pwd" id="re_pwd" placeholder="Password" class="form-control" required/>
                       </div><br>
-                <button class="btn btn-danger" id="checkMortStatus" type="submit">Submit</button>
+                <button class="btn btn-danger" id="login" type="button">Submit</button>
             </div>
             <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
           </div>
