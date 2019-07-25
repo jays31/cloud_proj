@@ -20,50 +20,77 @@
     }
   </style>
 
+<script type="text/javascript">
+
+  $(document).ready(function(){
+  $("#incFindMort").on('click',   function (e) {
+    // alert ("button was clicked");
+     
+          var incmlsid=$("#incmlsid").val();
+          var incmortid=$("#incmortid").val();
+          $.ajax({
+         
+            url:"http://localhost:1337/InsuranceController/findrecord",
+            type: 'POST',
+            data: {ins_MlsID:incmlsid, ins_MortID:incmortid},
+            success: function (data) {
+              if (data.Success) {
+
+               window.location = "http://localhost:1337/insurance/info";
+  
+              }
+              else {
+                alert ("No Such Record");
+              }
+      },  
+      error: function(err){
+            alert('Details Incorrect');
+      }    
+  
+  });
+  
+  });
+  
+  });
+  
+  </script>
+
 </head>
 <body style="background-color: rgb(245, 255, 248)">
 
-<nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
-  <a class="navbar-brand" href="/insurance/home" style="color: white">Insurance Inc.</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</nav>
-<br><br><br>
-
-<div class ="centerali">
-  <br>
-      <div class="container">
-      <div class="row">
-
-        <div class="col-sm-6">
-          <form>
-            <div class="card text-center">
-              <div class="card-body">
-                <h5 class="card-title">Insurance</h5>
-                <p class="card-text">Insurance</p>
-                
-                <div class="input-group">
-                    <input type="text" name="remlsid" id="remlsid" placeholder="MLSs ID" class="form-control" required>
-                </div><br>
-
-                <div class="input-group">
-                    <input type="text" name="remortid" id="remortid" placeholder="Mortgage ID" class="form-control" required>
-                </div><br>
-
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-success" type="button" disabled>CA $</button>
-                    </div>
-                    <input type="number" step="1000" min="1000" name="appraisalval" id="appraisalval" placeholder="Appraisal Value" class="form-control" required/>
-                </div><br>
-
-                <button class="btn btn-success" id="checkMortStatus" type="submit">Submit</button>
+  <nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
+    <a class="navbar-brand" href="/insurance/home" style="color: white">Insurance Inc.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+  <br><br><br>
+  
+  <div class ="centerali">
+    <br>
+        <div class="container">
+        <div class="row">
+  
+          <div class="col-sm-6">
+            <form>
+              <div class="card text-center">
+                <div class="card-body">
+                  <h5 class="card-title">Insurance</h5>
+                  <p class="card-text">Insurance</p>
+                  
+                  <div class="input-group">
+                      <input type="text" name="incmlsid" id="incmlsid" placeholder="MLSs ID" class="form-control" required>
+                  </div><br>
+  
+                  <div class="input-group">
+                      <input type="text" name="incmortid" id="incmortid" placeholder="Mortgage ID" class="form-control" required>
+                  </div><br>
+                  <button class="btn btn-success" id="incFindMort" type="button">Find</button>
+              </div>
+              <div class="card-footer text-muted"><strong>© Insurance Inc. 2019</div>
             </div>
-            <div class="card-footer text-muted"><strong>© Insurance Inc. 2019</div>
+            </form>
           </div>
-          </form>
-        </div>
-</div>
-</body>
+  </div>
+  </body>  
 </html>
