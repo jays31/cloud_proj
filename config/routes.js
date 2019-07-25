@@ -37,7 +37,7 @@ module.exports.routes = {
   '/RErealestateController/updateAppraisalValue_805':'RErealestateController.updateAppraisalValue_805',
   '/InsuranceController/insertAppraisalVal_Ins':'InsuranceController.insertAppraisalVal_Ins',
 
-  /***************************************************************************
+  /*********************************************************************
   *                                                                          *
   * More custom routes here...                                               *
   * (See https://sailsjs.com/config/routes for examples.)                    *
