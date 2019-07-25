@@ -20,6 +20,55 @@
     }
   </style>
 
+  <script>
+  $(document).ready(function()
+  {
+      $("button").on('click',   function (e) 
+      {
+        //alert ("button was clicked");
+        
+              var reMIsID=$("#remlsid").val();
+              var reMortID=$("#remortid").val();
+              var appraisalvalInput=$("#appraisalval").val();
+              $.ajax(
+                {
+            
+                url:"http://localhost:1337/RErealestateController/updateAppraisalValue_805",
+                type: 'post',
+                data: {reMIsID:reMIsID, reMortID:reMortID, appraisalvalInput:appraisalvalInput },
+
+                success: function (data) {
+
+                  if (data.Success) {
+                    $("#feedback").append("Appraisal value updated to "+ appraisalvalInput);
+
+
+          
+                  
+
+                  }
+
+                  else {
+                    alert ("There was an issue updating the appraisal value, contact the system admin");
+                  }
+            
+          },
+          
+          error: function(err){
+                console.log("Please check your input");
+                alert('There is an application that requires system admisn attention');
+          }
+            
+            
+
+      });
+
+    });
+
+  });
+  
+  </script>
+
 </head>
 <body style="background-color: rgb(255, 245, 247)">
 
@@ -58,11 +107,13 @@
                     <input type="number" step="1000" min="1000" name="appraisalval" id="appraisalval" placeholder="Appraisal Value" class="form-control" required/>
                 </div><br>
 
-                <button class="btn btn-danger" id="checkMortStatus" type="submit">Submit</button>
+                <button class="btn btn-danger"  type="button">Submit</button>
             </div>
             <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
           </div>
           </form>
+          <div> <p id="feedback"></p>
+          </div>
         </div>
 </div>
 </body>

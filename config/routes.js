@@ -34,6 +34,7 @@ module.exports.routes = {
   '/EmployerController/approvalRequest_805': 'EmployerController.approvalRequest_805',
   '/BrokerMortgageController/employerApprovalUpdate_805': 'BrokerMortgageController.employerApprovalUpdate_805',
   '/RErealestateController/createAppraisalRequest':'RErealestateController.createAppraisalRequest',
+  '/RErealestateController/updateAppraisalValue_805':'RErealestateController.updateAppraisalValue_805',
 
   /***************************************************************************
   *                                                                          *
