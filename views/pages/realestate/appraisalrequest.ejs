@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   
   <style>
     .col-sm-6
@@ -19,7 +19,29 @@
       background-color: rgb(186, 58, 75);
     }
   </style>
+  <script>
+    $(document).ready(function () {
+      console.log("Test 1");
+      $("#checkMortStatus").click(function () {
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var brokrefID = $("#brokrefID").val();
+        var mlsId = $("#mlsid").val();
 
+        $.post("http://localhost:1337/RErealestateController/createAppraisalRequest", {
+            submitted_firstname: firstName,
+            submitted_lastname: lastName,
+            submitted_mlsId: mlsId,
+            submitted_mortId: brokrefID
+          },
+
+          function (data, status) {
+            var appStatus = data['regSuccess'];
+            $("#feedback").html(appStatus);
+          });
+      });
+    });
+  </script>
 </head>
 <body style="background-color: rgb(255, 245, 247)">
 
@@ -44,7 +66,11 @@
                 <p class="card-text">For your Real Estate</p>
                 
                 <div class="input-group">
-                    <input type="text" name="custname" id="custname" placeholder="Customer Name" class="form-control" required>
+                    <input type="text" name="fname" id="firstName" placeholder="First Name" class="form-control" required>
+                  </div><br>
+
+                  <div class="input-group">
+                    <input type="text" name="lname" id="lastName" placeholder="Last Name" class="form-control" required>
                   </div><br>
 
                   <div class="input-group">
@@ -54,8 +80,9 @@
                     <input type="text" name="brokrefID" id="brokrefID" placeholder="Brokers Reference ID" class="form-control" required>
                     </div><br>
 
-                <button class="btn btn-danger" id="checkMortStatus" type="submit">Submit</button>
+                <button class="btn btn-danger" id="checkMortStatus" type="button">Submit</button>
             </div>
+            <div class="card-footer text-muted"><a id="feedback"></a></div>
             <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
           </div>
           </form>

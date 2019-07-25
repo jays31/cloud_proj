@@ -7,32 +7,27 @@
 
 module.exports = {
 
-  attributes: {
-
-  /*  custname : {
-        type : 'string',
-        required : true
+    attributes: {
+  
+      firstName : {
+          type : 'string',
+          required : true
+      },
+      lastName : {
+          type : 'string',
+          required : true
+      },
+      mlsId : {
+          type : 'string',
+          required : true,
+      },
+      mortId :{
+          type : 'string',
+          required : true
+      },
+      appraisalValue : {
+          type : 'number',
+      }
     },
-
-    mlsid : {
-        type : 'string',
-        required : true,
-    },
-
-    brokrefID :{
-        type : 'string',
-        required : true
-    },
-
-    appraisalVal : {
-        type : 'number',
-    },
-
-    marketDemandLevel : {
-        type : 'string'
-    } */
-
-  },
-
-};
-
+  };
+  
