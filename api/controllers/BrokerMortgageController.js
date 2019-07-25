@@ -34,5 +34,32 @@ module.exports = {
             res.send({ regSuccess: "Application was submitted successfully!"});
         });
     },
+
+    employerApprovalUpdate_805: function (req, res) {
+        var mortId = req.body.mortId;
+        var salary = req.body.employee_salary;
+        var employed_date = req.body.employeestartdate;
+        var employerConfirmationStatus = req.body.approvalStatus;
+        
+        
+        sails.log("got here"+salary);
+        sails.log("got here"+employed_date);
+        //var studentRecord= await Student.findOne({studId: studId});
+        //sails.log(studentRecord);
+        //Student.find({ id: studId }).exec(function (err, Student) {
+      
+        BrokerMortgage.update({id:mortId}).set({salary:salary, employed_date:employed_date, employerConfirmationStatus:employerConfirmationStatus }).exec (function(err){
+            if (err) {
+                sails.log("could not update record");
+            }
+
+            sails.log("updated successfully");
+        });
+        //BrokerMortgage.query('update BrokerMortgage set BrokerMortgage.salary='+ salary+', BrokerMortgage.employed_date='+employed_date+', BrokerMortgage.employerConfirmationStatus='+employerConfirmationStatus+'');
+
+    
+        
+       
+      },
 };
 

@@ -31,6 +31,8 @@ module.exports.routes = {
   '/insurance/home': { view: 'pages/insurance/insurancehome'},
   '/BrokerMortgageController/createMortgageRequest' : 'BrokerMortgageController.createMortgageRequest',
   '/EmployerController/userLogin_805': 'EmployerController.userLogin_805',
+  '/EmployerController/approvalRequest_805': 'EmployerController.approvalRequest_805',
+  '/BrokerMortgageController/employerApprovalUpdate_805': 'BrokerMortgageController.employerApprovalUpdate_805',
 
   /***************************************************************************
   *                                                                          *

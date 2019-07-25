@@ -45,11 +45,17 @@ $("button").on('click',   function (e) {
           data: {employeeEmail:useremail, employeepwd:userpassword},
 
           success: function (data) {
+
+            if (data.wrongEmail) {
+    
+                alert("Invalid email ID");
+
+              }
             console.log(data.Success)
 
             if (data.Success) {
     
-          window.location = "http://localhost:1337/emp/empconfirmation";
+             window.location = "http://localhost:1337/emp/empconfirmation";
 
             }
 

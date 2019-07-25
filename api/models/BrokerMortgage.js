@@ -57,6 +57,15 @@ module.exports = {
     insuranceStatus: {
       type: 'string'
     },
+
+    salary: {
+      type: 'string'
+    },
+
+    employed_date: {
+      type: 'string'
+    },
+    
     employerConfirmationStatus: {
       type: 'string'
     },

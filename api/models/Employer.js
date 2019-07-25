@@ -33,6 +33,11 @@ module.exports = {
       type: 'number',
       required:true
     },
+
+    employed_date: {
+      type: 'string',
+      required:false
+    },
   },
 
 };

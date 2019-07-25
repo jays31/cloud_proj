@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
 
-    custname : {
+  /*  custname : {
         type : 'string',
         required : true
     },
@@ -30,7 +30,7 @@ module.exports = {
 
     marketDemandLevel : {
         type : 'string'
-    }
+    } */
 
   },
 

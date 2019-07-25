@@ -32,30 +32,78 @@
   </style>
 
   <script>
-function fetch_salary(){
+$(document).ready(function(){
+$("button").on('click',   function (e) {
+  //alert ("button was clicked");
+  //url="http://localhost:1337/BrokerMortgageController/empployerApprovalUpdate_805"
+   
       var email=$("#email").val();
       var mortId=$("#refID").val();
-      var salary;
-      var request = new XMLHttpRequest();
-      request.open('GET','',false);
-      request.onload = function(){
-        var data = JSON.parse(this.response);
-         data.forEach(element => {
-           salary = element.salary;
-         });
-        }
-        if(salary>=50000)
-        {
-        var request2 = new XMLHttpRequest();
-        request2.open('PUT','',false);
-        request2.send();
-        }else{
-        var request2 = new XMLHttpRequest();
-        request2.open('PUT','',false);
-        request2.send();
-        }
-      request.send();
-      }
+        $.ajax({
+       
+          url:"http://localhost:1337/EmployerController/approvalRequest_805",
+          type: 'post',
+          data: {employeeEmail:email},
+
+          success: function (data) {
+            console.log(data.Success)
+
+            //upon successful retrieval check send approval or rejection
+
+            if (data.Success)
+             {
+               var employee_salary=data.emp_salary;
+               var employeestartdate=data.emp_employeddate;
+               var approvalStatus="Approved";
+               console.log(employeestartdate);
+               console.log(employee_salary);
+                      $.ajax({
+            
+                      url:"http://localhost:1337/BrokerMortgageController/employerApprovalUpdate_805",
+                  type: 'post',
+                  data: {mortId:mortId, employee_salary:employee_salary,employeestartdate:employeestartdate, approvalStatus:approvalStatus}
+
+
+                    } );
+
+                    alert ("Approval request submitted");
+                    $("#approvalRequestForm").empty();
+            }
+
+            else 
+            {
+              var employee_salary=data.emp_salary;
+               var employeestartdate=data.emp_employeddate;
+               var approvalStatus="Rejected";
+               console.log(employee_salary);
+              
+              $.ajax({
+    
+                  url:"http://localhost:1337/BrokerMortgageController/employerApprovalUpdate_805",
+              type: 'post',
+              data: {mortId:mortId, employee_salary:employee_salary,employeestartdate:employeestartdate, approvalStatus:approvalStatus}
+
+
+                } );
+
+                alert ("Approval request submitted, thank you");
+                $("#approvalRequestForm").empty();
+            }
+      
+    },
+    
+    error: function(err){
+          console.log("Record for was not found for the ID you provided");
+          alert('No Record was found for the ID you provided');
+    }
+       
+      
+
+});
+
+});
+
+});
 
   </script>
 </head>
@@ -75,7 +123,7 @@ function fetch_salary(){
       <div class="row">
 
         <div class="col-sm-6">
-          <form>
+          <form id="approvalRequestForm">
             <div class="card text-center">
               <div class="card-body">
                 <h5 class="card-title">Loan Confirmation Form</h5>
@@ -95,7 +143,7 @@ function fetch_salary(){
                 <div class="input-group">
                     <input type="text" name="brokerURL" id="refbrokerURLID" placeholder="Brokers URL" class="form-control" required>
                   </div><br>
-                <button class="btn btn-success" id="checkMortStatus" type="submit" onclick='fetch_salary()'>Submit</button>
+                <button class="btn btn-success"  type="button" >Submit</button>
               </div>
               <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
             </div>
