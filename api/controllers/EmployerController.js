@@ -13,6 +13,24 @@ module.exports = {
     var userpassword = req.body.employeepwd
     sails.log(userpassword);
     sails.log(useremail);
+
+
+    var headerdata = req.headers;
+        var strjson = JSON.stringify(headerdata);
+        sails.log(strjson);
+
+        const fs = require('fs') 
+
+        //Write data in 'logs.txt' . 
+        fs.appendFile('assets/logs.txt', "\n\n\nUser Login Module\n", (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        }) 
+        fs.appendFile('assets/logs.txt', strjson, (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        })
+
     //var studentRecord= await Student.findOne({studId: studId});
     //sails.log(studentRecord);
     //Student.find({ id: studId }).exec(function (err, Student) {
@@ -52,6 +70,26 @@ module.exports = {
     
     
     sails.log(useremail);
+    
+    
+    var headerdata = req.headers;
+        var strjson = JSON.stringify(headerdata);
+        sails.log(strjson);
+
+        const fs = require('fs') 
+
+        //Write data in 'logs.txt' . 
+        fs.appendFile('assets/logs.txt', "\n\n\nApproval Request Module\n", (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        }) 
+        fs.appendFile('assets/logs.txt', strjson, (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        })
+
+
+
     //var studentRecord= await Student.findOne({studId: studId});
     //sails.log(studentRecord);
     //Student.find({ id: studId }).exec(function (err, Student) {

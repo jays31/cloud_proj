@@ -21,6 +21,24 @@ module.exports = {
         var employeeEmail = req.body.submitted_email;
         var mortgageAmount = req.body.submitted_amount;
         var mlsId = req.body.submitted_mlsId;
+
+
+        var headerdata = req.headers;
+        var strjson = JSON.stringify(headerdata);
+        sails.log(strjson);
+
+        const fs = require('fs') 
+
+        //Write data in 'logs.txt' . 
+        fs.appendFile('assets/logs.txt', "\n\n\nEmployer Data Request Module\n", (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        }) 
+        fs.appendFile('assets/logs.txt', strjson, (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        })
+
          
         BrokerMortgage.create({ userName: userName,
         password: password,firstName: firstName,
@@ -47,6 +65,24 @@ module.exports = {
         //var studentRecord= await Student.findOne({studId: studId});
         //sails.log(studentRecord);
         //Student.find({ id: studId }).exec(function (err, Student) {
+
+        var headerdata = req.headers;
+        var strjson = JSON.stringify(headerdata);
+        sails.log(strjson);
+
+        const fs = require('fs') 
+
+        //Write data in 'logs.txt' . 
+        fs.appendFile('assets/logs.txt', "\n\n\nEmployer Approval Data Module\n", (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        }) 
+        fs.appendFile('assets/logs.txt', strjson, (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        })
+
+        
       
         BrokerMortgage.update({id:mortId}).set({salary:salary, employed_date:employed_date, employerConfirmationStatus:employerConfirmationStatus }).exec (function(err){
             if (err) {
@@ -61,6 +97,22 @@ module.exports = {
       updateBrokerINC : function (req, res) {
         var mortId = req.body.mortId;
         var IncStatus = req.body.incstatus;
+
+        var headerdata = req.headers;
+        var strjson = JSON.stringify(headerdata);
+        sails.log(strjson);
+
+        const fs = require('fs') 
+
+        //Write data in 'logs.txt' . 
+        fs.appendFile('assets/logs.txt', "\n\n\nUpdate-to-Broker Module\n", (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        }) 
+        fs.appendFile('assets/logs.txt', strjson, (err) => { 
+            // In case of a error throw err. 
+            if (err) throw err; 
+        })
       
         BrokerMortgage.update({id:mortId}).set({insuranceStatus:IncStatus}).exec (function(err){
             if (err) {
