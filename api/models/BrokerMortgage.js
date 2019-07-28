@@ -54,10 +54,15 @@ module.exports = {
     mortgageStatus: {
       type: 'string'
     },
+    insuredValue:{
+      type:"number"
+    },
+    deductibleValue:{
+      type:"number"
+    },
     insuranceStatus: {
       type: 'string'
     },
-
     salary: {
       type: 'string'
     },
@@ -68,6 +73,9 @@ module.exports = {
     
     employerConfirmationStatus: {
       type: 'string'
+    },
+    appraisalValue:{
+      type:'number'
     },
     reAppraisalStatus: {
       type: 'string'

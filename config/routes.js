@@ -40,7 +40,7 @@ module.exports.routes = {
   '/InsuranceController/findrecord' : 'InsuranceController.findrecord',
   '/InsuranceController/updateInsurance' : 'InsuranceController.updateInsurance',
   '/BrokerMortgageController/updateBrokerINC' : 'BrokerMortgageController.updateBrokerINC',
-
+  '/BrokerMortgageController/updateBrokerRE' : 'BrokerMortgageController.updateBrokerRE',
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

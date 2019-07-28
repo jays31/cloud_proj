@@ -62,9 +62,7 @@ module.exports = {
         
         sails.log("got here"+salary);
         sails.log("got here"+employed_date);
-        //var studentRecord= await Student.findOne({studId: studId});
-        //sails.log(studentRecord);
-        //Student.find({ id: studId }).exec(function (err, Student) {
+
 
         var headerdata = req.headers;
         var strjson = JSON.stringify(headerdata);
@@ -93,6 +91,23 @@ module.exports = {
         });
         //BrokerMortgage.query('update BrokerMortgage set BrokerMortgage.salary='+ salary+', BrokerMortgage.employed_date='+employed_date+', BrokerMortgage.employerConfirmationStatus='+employerConfirmationStatus+'');
       },
+
+      updateBrokerRE : function(req,res)
+      {
+        var mortID = req.body.reMortID;
+        var incomingAppraisalval = req.body.appraisalvalInput;
+        var status = "Approved";
+
+        BrokerMortgage.update({id:mortID}).set({reAppraisalStatus:status,appraisalValue:incomingAppraisalval}).exec (function(err){
+            if (err) {
+                sails.log("could not update appraisal record");
+            }
+
+            sails.log("appraisal updated successfully");
+        });
+
+      },
+
 
       updateBrokerINC : function (req, res) {
         var mortId = req.body.mortId;

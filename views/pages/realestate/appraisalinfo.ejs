@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Employer Inc. | Home</title>
   <meta charset="utf-8">
@@ -8,93 +9,75 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
+
   <style>
-    .col-sm-6
-      {
-        margin: 0 auto;
-        float : none;
-      }
-    .colo{
+    .col-sm-6 {
+      margin: 0 auto;
+      float: none;
+    }
+
+    .colo {
       background-color: rgb(186, 58, 75);
     }
   </style>
 
   <script>
-  $(document).ready(function()
-  {
-      $("button").on('click',   function (e) 
-      {
+    $(document).ready(function () {
+      $("button").on('click', function (e) {
         //alert ("button was clicked");
-        
-              var reMIsID=$("#remlsid").val();
-              var reMortID=$("#remortid").val();
-              var appraisalvalInput=$("#appraisalval").val();
-              $.ajax(
-                {
-            
-                url:"http://localhost:1337/RErealestateController/updateAppraisalValue_805",
-                type: 'post',
-                data: {reMIsID:reMIsID, reMortID:reMortID, appraisalvalInput:appraisalvalInput },
+        var reMIsID = $("#remlsid").val();
+        var reMortID = $("#remortid").val();
+        var appraisalvalInput = $("#appraisalval").val();
+        $.ajax(
+          {
+            url: "http://localhost:1337/RErealestateController/updateAppraisalValue_805",
+            type: 'post',
+            data: { reMIsID: reMIsID, reMortID: reMortID, appraisalvalInput: appraisalvalInput },
+            success: function (data) {
+              if (data.Success) {
+                $("#feedback").append("Appraisal value updated to " + appraisalvalInput);
+                $.ajax({
+                  url: "http://localhost:1337/InsuranceController/insertAppraisalVal_Ins",
+                  type: 'post',
+                  data: { reMIsID: reMIsID, reMortID: reMortID, appraisalvalInput: appraisalvalInput }
+                });
 
-                success: function (data) {
+                $.ajax({
+                  url: "http://localhost:1337/BrokerMortgageController/updateBrokerRE",
+                  type: 'post',
+                  data: {reMortID: reMortID, appraisalvalInput: appraisalvalInput }
+                });
 
-                  if (data.Success) {
-                    $("#feedback").append("Appraisal value updated to "+ appraisalvalInput);
-
-                    $.ajax({
-            
-                        url:"http://localhost:1337/InsuranceController/insertAppraisalVal_Ins",
-                    type: 'post',
-                    data: {reMIsID:reMIsID, reMortID:reMortID, appraisalvalInput:appraisalvalInput}
-
-
-                      } );
-
-                      alert ("Approval request submitted");
-                      $("#approvalRequestForm")[0].reset();
-
-
-          
-                  
-
-                  }
-
-                  else {
-                    alert ("There was an issue updating the appraisal value, contact the system admin");
-                  }
-            
-          },
-          
-          error: function(err){
-                console.log("Please check your input");
-                alert('There is an application that requires system admisn attention');
-          }
-            
-            
-
+                alert("Approval request submitted");
+                //$("#approvalRequestForm")[0].reset();
+              }
+              else {
+                alert("There was an issue updating the appraisal value, contact the system admin");
+              }
+            },
+            error: function (err) {
+              console.log("Please check your input");
+              alert('There is an application that requires system admisn attention');
+            }
+          });
       });
-
     });
-
-  });
-  
   </script>
-
 </head>
+
 <body style="background-color: rgb(255, 245, 247)">
 
-<nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
-  <a class="navbar-brand" href="/realestate/rehome" style="color: white">Real Estate Inc.</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</nav>
-<br><br><br>
+  <nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
+    <a class="navbar-brand" href="/realestate/rehome" style="color: white">Real Estate Inc.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+  <br><br><br>
 
-<div class ="centerali">
-  <br>
-      <div class="container">
+  <div class="centerali">
+    <br>
+    <div class="container">
       <div class="row">
 
         <div class="col-sm-6">
@@ -103,30 +86,34 @@
               <div class="card-body">
                 <h5 class="card-title">Appraisal Information</h5>
                 <p class="card-text">Evaluate the real estate</p>
-                
+
                 <div class="input-group">
-                    <input type="text" name="remlsid" id="remlsid" placeholder="MLSs ID" class="form-control" required>
+                  <input type="text" name="remlsid" id="remlsid" placeholder="MLSs ID" class="form-control" required>
                 </div><br>
 
                 <div class="input-group">
-                    <input type="text" name="remortid" id="remortid" placeholder="Mortgage ID" class="form-control" required>
+                  <input type="text" name="remortid" id="remortid" placeholder="Mortgage ID" class="form-control"
+                    required>
                 </div><br>
 
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-danger" type="button" disabled>CA $</button>
-                    </div>
-                    <input type="number" step="1000" min="1000" name="appraisalval" id="appraisalval" placeholder="Appraisal Value" class="form-control" required/>
+                  <div class="input-group-prepend">
+                    <button class="btn btn-danger" type="button" disabled>CA $</button>
+                  </div>
+                  <input type="number" step="1000" min="1000" name="appraisalval" id="appraisalval"
+                    placeholder="Appraisal Value" class="form-control" required />
                 </div><br>
 
-                <button class="btn btn-danger"  type="button">Submit</button>
+                <button class="btn btn-danger" type="button">Submit</button>
+              </div>
+              <div class="card-footer text-muted"><strong>© Realestate Inc. 2019</div>
             </div>
-            <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
-          </div>
           </form>
-          <div> <p id="feedback"></p>
+          <div>
+            <p id="feedback"></p>
           </div>
         </div>
-</div>
+      </div>
 </body>
+
 </html>
