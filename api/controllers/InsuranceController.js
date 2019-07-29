@@ -9,7 +9,7 @@
 const log4js = require('log4js');
 log4js.configure({
   appenders: {
-    mortgageBroker: {
+    insurance: {
       type: 'file',
       filename: 'loanApplication.log'
     }
@@ -17,7 +17,7 @@ log4js.configure({
   categories: {
     default: {
       appenders: ['insurance'],
-      level: 'error'
+      level: 'info'
     }
   }
 });
