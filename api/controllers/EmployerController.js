@@ -19,27 +19,19 @@ module.exports = {
     var useremail = req.body.employeeEmail;
     var userpassword = req.body.employeepwd
     sails.log(userpassword);
-    //sails.log(useremail); decrypt incoming password below
     var passdecryptFromUser = (CryptoJS.AES.decrypt(userpassword.toString(), 'quick Oats')).toString(CryptoJS.enc.Utf8);
-    sails.log(passdecryptFromUser);
     logger.info('Employee Login Begins..');
-
     Employer.find().where({
       employeeEmail: useremail
     }).exec(function (err, Employer) {
       if (err) {
         sails.log("ended in error");
-
         res.send({
           error: true
         });
       }
-
-      sails.log(Employer);
       const userRecord = Employer[0];
-      //   sails.log(userRecord.length()); derypt password stored in db
       var passdecrypt = (CryptoJS.AES.decrypt(userRecord.employeepwd.toString(), 'quick Oats')).toString(CryptoJS.enc.Utf8);
-
 
       if (Employer.length === 0) {
         res.send({
@@ -49,23 +41,16 @@ module.exports = {
       }
 
       if (passdecrypt === passdecryptFromUser) {
-        sails.log(userRecord.employeepwd);
         res.send({
           Success: true
         });
-
       } else {
-
         res.send({
           Success: false
         });
-
       }
-
       logger.info('Employee Login Begins..');
-
     });
-
   },
 
   approvalRequest_805: function (req, res) {
@@ -77,16 +62,11 @@ module.exports = {
     }).exec(function (err, Employee) {
       if (err) {
         sails.log("ended in error");
-
         res.send({
           error: 'User was not found.'
         });
       }
-
-      sails.log(Employee);
       const recordFound = Employee[0];
-      sails.log(recordFound.salary);
-
       if (recordFound.salary >= 50000) {
         res.send({
           Success: true,
@@ -94,17 +74,13 @@ module.exports = {
           emp_employeddate: recordFound.employed_date
         });
       } else {
-
         res.send({
           Success: false,
           emp_salary: recordFound.salary,
           emp_employeddate: recordFound.employed_date
         });
-
       }
       logger.info('Employer Approval Ends..');
     });
   },
-
-
 };

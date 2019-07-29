@@ -62,8 +62,6 @@ module.exports = {
       if (err) {
         sails.log("could not update record");
       }
-
-      sails.log("Updated successfully");
       res.send({
         Success: true,
         Message: "updated successfully"

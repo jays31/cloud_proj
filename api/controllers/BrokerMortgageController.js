@@ -89,8 +89,6 @@ module.exports = {
       if (err) {
         sails.log("could not update record");
       }
-
-      sails.log("updated successfully");
     });
     logger.info('Initiate Employer Approval Status Update, received from employer: ends..');
   },
@@ -110,8 +108,6 @@ module.exports = {
       if (err) {
         sails.log("could not update appraisal record");
       }
-
-      sails.log("appraisal updated successfully");
     });
     logger.info('Initiate Real-estate Appraisal Status Update , received from Real-estate Broker: ends..');
   },
@@ -130,8 +126,6 @@ module.exports = {
       if (err) {
         sails.log("could not update record");
       }
-
-      sails.log("updated successfully");
     });
     logger.info('Initiate Insurance Status Update, received from Insurance Agent: ends..');
   },

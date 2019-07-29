@@ -36,10 +36,8 @@ module.exports = {
                 res.send( { error: "Database Error: Could not insert into table" }); 
             }
             res.send({ regSuccess: "Application was submitted successfully!"});
-            sails.log("record inserted successfully");
         });
         logger.info('Insurance Request Received from real estate broker: ends..');
-
     },
   
     updateInsurance:function(req,res)
@@ -55,11 +53,8 @@ module.exports = {
             if (err) {
                 sails.log("could not update record");
             }
-            sails.log("updated successfully");
             res.send({ Success: true });
         });
         logger.info('Insurance Approval Update: ends..');
- 
     }
 };
-
