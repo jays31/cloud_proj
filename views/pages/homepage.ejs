@@ -56,7 +56,7 @@
       var form_amount=$("#mortgage").val();
       var form_mlsId=$("#mls_id").val();
         
-      $.post("http://localhost:1337/BrokerMortgageController/createMortgageRequest",{
+      $.post("https://cloud-grp-10.azurewebsites.net/BrokerMortgageController/createMortgageRequest",{
         submitted_username:form_username,
         submitted_password:form_password,
         submitted_firstname: form_firstname,
@@ -72,7 +72,7 @@
       function(data, status){
         var appStatus = data['regSuccess'];
         var request = new XMLHttpRequest()
-        request.open('GET','http://localhost:1337/BrokerMortgage/find?employeeEmail='+form_email,true)
+        request.open('GET','https://cloud-grp-10.azurewebsites.net/BrokerMortgage/find?employeeEmail='+form_email,true)
         request.onload = function(){
           var data = JSON.parse(this.response)  
           data.forEach(element => {

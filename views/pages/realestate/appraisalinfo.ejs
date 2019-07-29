@@ -30,20 +30,20 @@
         var appraisalvalInput = $("#appraisalval").val();
         $.ajax(
           {
-            url: "http://localhost:1337/RErealestateController/updateAppraisalValue_805",
+            url: "https://cloud-grp-10.azurewebsites.net/RErealestateController/updateAppraisalValue_805",
             type: 'post',
             data: { reMIsID: reMIsID, reMortID: reMortID, appraisalvalInput: appraisalvalInput },
             success: function (data) {
               if (data.Success) {
                 $("#feedback").append("Appraisal value updated to " + appraisalvalInput);
                 $.ajax({
-                  url: "http://localhost:1337/InsuranceController/insertAppraisalVal_Ins",
+                  url: "https://cloud-grp-10.azurewebsites.net/InsuranceController/insertAppraisalVal_Ins",
                   type: 'post',
                   data: { reMIsID: reMIsID, reMortID: reMortID, appraisalvalInput: appraisalvalInput }
                 });
 
                 $.ajax({
-                  url: "http://localhost:1337/BrokerMortgageController/updateBrokerRE",
+                  url: "https://cloud-grp-10.azurewebsites.net/BrokerMortgageController/updateBrokerRE",
                   type: 'post',
                   data: {reMortID: reMortID, appraisalvalInput: appraisalvalInput }
                 });

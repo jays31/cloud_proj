@@ -44,7 +44,7 @@ $("button").on('click',   function (e) {
         encryptedPass=encryptedPass.toString();
         $.ajax({
        
-          url:"http://localhost:1337/EmployerController/userLogin_805",
+          url:"https://cloud-grp-10.azurewebsites.net/EmployerController/userLogin_805",
           type: 'post',
           data: {employeeEmail:useremail, employeepwd:encryptedPass},
 
@@ -59,7 +59,7 @@ $("button").on('click',   function (e) {
 
             if (data.Success) {
     
-             window.location = "http://localhost:1337/emp/empconfirmation";
+             window.location = "https://cloud-grp-10.azurewebsites.net/emp/empconfirmation";
 
             }
 

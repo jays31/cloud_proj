@@ -37,7 +37,6 @@ module.exports.routes = {
   '/RErealestateController/updateAppraisalValue_805':'RErealestateController.updateAppraisalValue_805',
   '/InsuranceController/insertAppraisalVal_Ins':'InsuranceController.insertAppraisalVal_Ins',
   '/insurance/info': { view: 'pages/insurance/insuranceInfo'},
-  '/InsuranceController/findrecord' : 'InsuranceController.findrecord',
   '/InsuranceController/updateInsurance' : 'InsuranceController.updateInsurance',
   '/BrokerMortgageController/updateBrokerINC' : 'BrokerMortgageController.updateBrokerINC',
   '/BrokerMortgageController/updateBrokerRE' : 'BrokerMortgageController.updateBrokerRE',

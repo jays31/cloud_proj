@@ -28,7 +28,7 @@
         var brokrefID = $("#brokrefID").val();
         var mlsId = $("#mlsid").val();
 
-        $.post("http://localhost:1337/RErealestateController/createAppraisalRequest", {
+        $.post("https://cloud-grp-10.azurewebsites.net/RErealestateController/createAppraisalRequest", {
             submitted_firstname: firstName,
             submitted_lastname: lastName,
             submitted_mlsId: mlsId,

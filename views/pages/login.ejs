@@ -42,7 +42,7 @@
             var username = $("#user_id").val();
             var password = $("#user_pass").val();
             $.ajax({
-              url: 'http://localhost:1337/BrokerMortgage/find',
+              url: 'https://cloud-grp-10.azurewebsites.net/BrokerMortgage/find',
               method: 'GET',
               data: {
                 userName: username,
@@ -51,7 +51,7 @@
               dataType: 'json',
               success: function (response) {
                 if (null != response && response.length > 0) {
-                  window.location = "http://localhost:1337/status";
+                  window.location = "https://cloud-grp-10.azurewebsites.net/status";
                 } else {
                   alert('Invalid Login');
                 }
