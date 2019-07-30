@@ -41,6 +41,7 @@ module.exports.routes = {
   '/BrokerMortgageController/updateBrokerINC': 'BrokerMortgageController.updateBrokerINC',
   '/BrokerMortgageController/updateBrokerRE': 'BrokerMortgageController.updateBrokerRE',
   '/log': { view: 'pages/log' },
+  'post /create': 'EmailController.create',
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

@@ -145,6 +145,8 @@ module.exports = {
   updateBrokerINC: function (req, res) {
     var mortId = req.body.mortId;
     var IncStatus = req.body.incstatus;
+    var deductibleValue = req.body.deductibleValue;
+    var insuredValue = req.body.insuredValue;
 
     logger.info('Initiate Insurance Status Update, received from Insurance Agent: begins..');
     var log_i = 'Initiate Insurance Status Update, received from Insurance Agent: begins..';
@@ -154,7 +156,7 @@ module.exports = {
     BrokerMortgage.update({
       id: mortId
     }).set({
-      insuranceStatus: IncStatus
+      insuranceStatus: IncStatus, deductibleValue: deductibleValue, insuredValue: insuredValue, mortgageStatus: 'Approved'
     }).exec(function (err) {
       if (err) {
         sails.log("could not update record");

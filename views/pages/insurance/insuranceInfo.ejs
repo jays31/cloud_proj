@@ -59,7 +59,7 @@
               $.ajax({
                 url: "https://cloud-grp-10.azurewebsites.net/BrokerMortgageController/updateBrokerINC",
                 type: 'POST',
-                data: { mortId: icmortid, incstatus: 'Approved' }
+                data: { mortId: icmortid, incstatus: 'Approved', insuredValue: insuredValue, deductibleValue: deductibleValue }
               });
             }
             else {
