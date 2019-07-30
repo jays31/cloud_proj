@@ -42,8 +42,11 @@ module.exports = {
           error: true
         });
       }
-      const userRecord = Employer[0];
-      var passdecrypt = (CryptoJS.AES.decrypt(userRecord.employeepwd.toString(), 'quick Oats')).toString(CryptoJS.enc.Utf8);
+
+      sails.log(Employer);
+      sails.log(Employer.length);
+
+    
 
       if (Employer.length === 0) {
         res.send({
@@ -54,6 +57,9 @@ module.exports = {
         logger.info(log_o);
         request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_o) });
       }
+
+      const userRecord = Employer[0];
+      var passdecrypt = (CryptoJS.AES.decrypt(userRecord.employeepwd.toString(), 'quick Oats')).toString(CryptoJS.enc.Utf8);
 
       if (passdecrypt === passdecryptFromUser) {
         res.send({
