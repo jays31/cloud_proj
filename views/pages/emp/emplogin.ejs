@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Employer Inc. | Home</title>
   <meta charset="utf-8">
@@ -9,96 +10,133 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
-  
+
   <style>
-    .headstyle{
-      background-color: rgb(177,194,204);
+    .headstyle {
+      background-color: rgb(177, 194, 204);
       height: 120px
     }
-    .col-sm-6
-      {
-        margin: 0 auto;
-        float : none;
-      }
-    .colo{
-      background-color: rgb(19,68,120);
+
+    .col-sm-6 {
+      margin: 0 auto;
+      float: none;
     }
-    .centerali{
+
+    .colo {
+      background-color: rgb(19, 68, 120);
+    }
+
+    .centerali {
       text-align: center;
       margin-top: -5px
     }
-    .display-2{
+
+    .display-2 {
       text-align: center;
     }
-  </style>
-<script type="text/javascript">
 
-$(document).ready(function(){
-$("button").on('click',   function (e) {
-  //alert ("button was clicked");
-   
-        var useremail=$("#emplogin_email").val();
-        var userpassword=$("#emplogin_pwd").val();
+    .modal-lg {
+      max-width: 50% !important;
+    }
+
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+  </style>
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+      $("button").on('click', function (e) {
+        //alert ("button was clicked");
+
+        var useremail = $("#emplogin_email").val();
+        var userpassword = $("#emplogin_pwd").val();
         //encrypt password
         var encryptedPass = CryptoJS.AES.encrypt(userpassword, 'quick Oats');
-        encryptedPass=encryptedPass.toString();
+        encryptedPass = encryptedPass.toString();
         $.ajax({
-       
-          url:"https://cloud-grp-10.azurewebsites.net/EmployerController/userLogin_805",
+
+          url: "http://localhost:1337/EmployerController/userLogin_805",
           type: 'post',
-          data: {employeeEmail:useremail, employeepwd:encryptedPass},
+          data: { employeeEmail: useremail, employeepwd: encryptedPass },
 
           success: function (data) {
 
             if (data.wrongEmail) {
-    
-                alert("Invalid email ID");
 
-              }
+              alert("Invalid email ID");
+
+            }
             console.log(data.Success)
 
             if (data.Success) {
-    
-             window.location = "https://cloud-grp-10.azurewebsites.net/emp/empconfirmation";
+
+              window.location = "http://localhost:1337/emp/empconfirmation";
 
             }
 
             else {
-              alert ("Invalid login details");
+              alert("Invalid login details");
             }
-      
-    },
-    
-    error: function(err){
-          console.log("Please check your input");
-          alert('login details incorrect');
-    }
-       
-      
 
-});
+          },
 
-});
-
-});
+          error: function (err) {
+            console.log("Please check your input");
+            alert('login details incorrect');
+          }
 
 
-</script>
+
+        });
+
+      });
+
+    });
+
+
+  </script>
 
 </head>
+
 <body style="background-color: rgb(242, 249, 255)">
 
-<nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
-  <a class="navbar-brand" href="/emp/login" style="color: white">Employer Inc.</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</nav>
-<br><br><br>
-
-<div class ="centerali">
-  <br>
-      <div class="container">
+  <nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
+    <a class="navbar-brand" href="/emp/login" style="color: white">Employer Inc.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <span>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">View
+        Logs</button>
+    </span>
+  </nav>
+  <br><br><br>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Logs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
+            src="http://localhost:1337/logs" frameborder="0">
+          </iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="centerali">
+    <br>
+    <div class="container">
       <div class="row">
 
         <div class="col-sm-6">
@@ -107,23 +145,30 @@ $("button").on('click',   function (e) {
               <div class="card-body">
                 <h5 class="card-title">Login</h5>
                 <p class="card-text">For employees</p>
-                
-                <div class="input-group">
-                    <input type="email" name="emplogin" id="emplogin_email" placeholder="Employee Email" class="form-control" required>
-                  </div><br>
 
                 <div class="input-group">
-                  <input type="password" name="emppwd" id="emplogin_pwd" placeholder="Password" class="form-control" required>
+                  <input type="email" name="emplogin" id="emplogin_email" placeholder="Employee Email"
+                    class="form-control" required>
                 </div><br>
 
-                <button class="btn btn-success"  type="button">Submit</button>
+                <div class="input-group">
+                  <input type="password" name="emppwd" id="emplogin_pwd" placeholder="Password" class="form-control"
+                    required>
+                </div><br>
+
+                <button class="btn btn-success" type="button">Submit</button>
               </div>
               <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
             </div>
           </form>
         </div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

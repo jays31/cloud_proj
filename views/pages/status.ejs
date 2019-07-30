@@ -1,74 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Warrior Mortgage</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>    
-    <style type="text/css">
-      nav {
-        text-align: center;
-        height: 75px;
-      }
-      footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%
-      }
-        body, html {
-        height: 100%;
-      }
-      .bg { 
-        /* The image used */
-        background-image: url("https://i0.wp.com/lilar.com/wp-content/uploads/2016/10/Savin-NY-Website-Background-Web.jpg?ssl=1");
 
-        /* Full height */
-        height: 100%; 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Warrior Mortgage</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <style type="text/css">
+    nav {
+      text-align: center;
+      height: 75px;
+    }
 
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      .col-sm-6
-      {
-        margin: 0 auto;
-        float : none;
-      }
-    </style>
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%
+    }
 
-<script>
+    body,
+    html {
+      height: 100%;
+    }
 
-  function checkStatus(){
-        var id=$("#wref").val();
-        var request = new XMLHttpRequest()
-        request.open('GET','https://cloud-grp-10.azurewebsites.net/BrokerMortgage/find?id='+id,true)
-        request.onload = function(){
-          var data = JSON.parse(this.response)
-          if(!$.trim(data)){
-            $("#modstatus").html("Mortgage ID does not exist!");
-          }
-          else{
-            data.forEach(element =>{
-              document.getElementById("mortStatus").value=element.mortgageStatus
-              document.getElementById("inrStatus").value=element.insuranceStatus
-              document.getElementById("empConfStatus").value=element.employerConfirmationStatus
-              document.getElementById("reStatus").value=element.reAppraisalStatus
-            });
-          }
+    .bg {
+      /* The image used */
+      background-image: url("https://i0.wp.com/lilar.com/wp-content/uploads/2016/10/Savin-NY-Website-Background-Web.jpg?ssl=1");
+
+      /* Full height */
+      height: 100%;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .col-sm-6 {
+      margin: 0 auto;
+      float: none;
+    }
+
+    .modal-lg {
+      max-width: 50% !important;
+    }
+
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+  </style>
+
+  <script>
+
+    function checkStatus() {
+      var id = $("#wref").val();
+      var request = new XMLHttpRequest()
+      request.open('GET', 'http://localhost:1337/BrokerMortgage/find?id=' + id, true)
+      request.onload = function () {
+        var data = JSON.parse(this.response)
+        if (!$.trim(data)) {
+          $("#modstatus").html("Mortgage ID does not exist!");
         }
-        request.send()
-  }
-  
-  </script>
-  </head>
+        else {
+          data.forEach(element => {
+            document.getElementById("mortStatus").value = element.mortgageStatus
+            document.getElementById("inrStatus").value = element.insuranceStatus
+            document.getElementById("empConfStatus").value = element.employerConfirmationStatus
+            document.getElementById("reStatus").value = element.reAppraisalStatus
+          });
+        }
+      }
+      request.send()
+    }
 
-  <body>
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand " href="/">Warrior Mortgage</a>
-    </nav>
-    <br>
-    <div class="bg">
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand " href="/">Warrior Mortgage</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">View
+      Logs</button>
+  </nav>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Logs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
+            src="http://localhost:1337/logs" frameborder="0">
+          </iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="bg">
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
@@ -78,11 +115,13 @@
                 <h5 class="card-title">Loan Status Check</h5>
                 <p class="card-text">Enter your unique reference number provider on the aplication submission</p>
                 <div class="input-group">
-                  <input type="text" name="wref" id="wref" placeholder="Loan Reference #ID" class="form-control" required/>
+                  <input type="text" name="wref" id="wref" placeholder="Loan Reference #ID" class="form-control"
+                    required />
                 </div><br>
               </div>
-              <div id="modstatus" class="card-footer text-muted"> 
-                <button class="btn btn-primary" id="checkMortStatus" type="button" onclick='checkStatus()'>Submit</button>
+              <div id="modstatus" class="card-footer text-muted">
+                <button class="btn btn-primary" id="checkMortStatus" type="button"
+                  onclick='checkStatus()'>Submit</button>
               </div>
             </div>
           </form>
@@ -100,34 +139,38 @@
 
                 <div class="input-group mb-3">
                   <div class="input-group-append">
-                        <button class="btn btn-info" id="status-broker" type="button">Mortgage Status&ensp;</button>
+                    <button class="btn btn-info" id="status-broker" type="button">Mortgage Status&ensp;</button>
                   </div>
-                  <input type="text" class="form-control" id="mortStatus" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
-                  
+                  <input type="text" class="form-control" id="mortStatus" aria-label="Recipient's username"
+                    aria-describedby="basic-addon2" disabled>
+
                 </div>
 
                 <div class="input-group mb-3">
                   <div class="input-group-append">
-                        <button class="btn btn-info" type="button">Insurance Status</button>
+                    <button class="btn btn-info" type="button">Insurance Status</button>
                   </div>
-                  <input type="text" class="form-control" id="inrStatus" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+                  <input type="text" class="form-control" id="inrStatus" aria-label="Recipient's username"
+                    aria-describedby="basic-addon2" disabled>
                 </div>
 
                 <div class="input-group mb-3">
-                    <div class="input-group-append">
-                        <button class="btn btn-info btn-md" type="button">Employer Confirmation Status&ensp;</button>
-                      </div>
-                  <input type="text" class="form-control" id="empConfStatus" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+                  <div class="input-group-append">
+                    <button class="btn btn-info btn-md" type="button">Employer Confirmation Status&ensp;</button>
+                  </div>
+                  <input type="text" class="form-control" id="empConfStatus" aria-label="Recipient's username"
+                    aria-describedby="basic-addon2" disabled>
                 </div>
                 <div class="input-group mb-3">
-                    <div class="input-group-append">
-                        <button class="btn btn-info btn-md" type="button">Appraisal Status&ensp;</button>
-                      </div>
-                  <input type="text" class="form-control" id="reStatus" aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+                  <div class="input-group-append">
+                    <button class="btn btn-info btn-md" type="button">Appraisal Status&ensp;</button>
+                  </div>
+                  <input type="text" class="form-control" id="reStatus" aria-label="Recipient's username"
+                    aria-describedby="basic-addon2" disabled>
                 </div>
               </div>
 
-              <div id="modstatus" class="card-footer text-muted"> 
+              <div id="modstatus" class="card-footer text-muted">
                 <a>Status Updated at: currentTime();</a>
               </div>
             </div>
@@ -136,7 +179,10 @@
       </div>
 
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
   </div>
 </body>
+
 </html>

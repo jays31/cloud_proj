@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Employer Inc. | Home</title>
   <meta charset="utf-8">
@@ -8,110 +9,146 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
+
   <style>
-    .headstyle{
-      background-color: rgb(177,194,204);
+    .headstyle {
+      background-color: rgb(177, 194, 204);
       height: 120px
     }
-    .col-sm-6
-      {
-        margin: 0 auto;
-        float : none;
-      }
-    .colo{
-      background-color: rgb(19,68,120);
+
+    .col-sm-6 {
+      margin: 0 auto;
+      float: none;
     }
-    .centerali{
+
+    .colo {
+      background-color: rgb(19, 68, 120);
+    }
+
+    .centerali {
       text-align: center;
       margin-top: -5px
     }
-    .display-2{
+
+    .display-2 {
       text-align: center;
+    }
+
+    .modal-lg {
+      max-width: 50% !important;
+    }
+
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
     }
   </style>
 
   <script>
-$(document).ready(function(){
-$("button").on('click',   function (e) { 
-      var email=$("#email").val();
-      var mortId=$("#refID").val();
+    $(document).ready(function () {
+      $("button").on('click', function (e) {
+        var email = $("#email").val();
+        var mortId = $("#refID").val();
         $.ajax({
-          url:"https://cloud-grp-10.azurewebsites.net/EmployerController/approvalRequest_805",
+          url: "http://localhost:1337/EmployerController/approvalRequest_805",
           type: 'post',
-          data: {employeeEmail:email},
+          data: { employeeEmail: email },
 
           success: function (data) {
             console.log(data.Success)
             //upon successful retrieval check send approval or rejection
-            if (data.Success)
-             {
-               var employee_salary=data.emp_salary;
-               var employeestartdate=data.emp_employeddate;
-               var approvalStatus="Approved";
-               console.log(employeestartdate);
-               console.log(employee_salary);
-                      $.ajax({
-            
-                      url:"https://cloud-grp-10.azurewebsites.net/BrokerMortgageController/employerApprovalUpdate_805",
-                  type: 'post',
-                  data: {mortId:mortId, employee_salary:employee_salary,employeestartdate:employeestartdate, approvalStatus:approvalStatus}
-
-
-                    } );
-
-                    alert ("Approval request submitted");
-                    $("#approvalRequestForm").empty();
-            }
-
-            else 
-            {
-              var employee_salary=data.emp_salary;
-               var employeestartdate=data.emp_employeddate;
-               var approvalStatus="Rejected";
-               console.log(employee_salary);
-              
+            if (data.Success) {
+              var employee_salary = data.emp_salary;
+              var employeestartdate = data.emp_employeddate;
+              var approvalStatus = "Approved";
+              console.log(employeestartdate);
+              console.log(employee_salary);
               $.ajax({
-    
-                  url:"https://cloud-grp-10.azurewebsites.net/BrokerMortgageController/employerApprovalUpdate_805",
-              type: 'post',
-              data: {mortId:mortId, employee_salary:employee_salary,employeestartdate:employeestartdate, approvalStatus:approvalStatus}
-                } );
 
-                alert ("Approval request submitted, thank you");
-                $("#approvalRequestForm").empty();
+                url: "http://localhost:1337/BrokerMortgageController/employerApprovalUpdate_805",
+                type: 'post',
+                data: { mortId: mortId, employee_salary: employee_salary, employeestartdate: employeestartdate, approvalStatus: approvalStatus }
+
+
+              });
+
+              alert("Approval request submitted");
+              $("#approvalRequestForm").empty();
             }
-      
-    },
-    
-    error: function(err){
-          console.log("Record for was not found for the ID you provided");
-          alert('No Record was found for the ID you provided');
-    }
-       
-      
 
-});
+            else {
+              var employee_salary = data.emp_salary;
+              var employeestartdate = data.emp_employeddate;
+              var approvalStatus = "Rejected";
+              console.log(employee_salary);
 
-});
+              $.ajax({
 
-});
+                url: "http://localhost:1337/BrokerMortgageController/employerApprovalUpdate_805",
+                type: 'post',
+                data: { mortId: mortId, employee_salary: employee_salary, employeestartdate: employeestartdate, approvalStatus: approvalStatus }
+              });
+
+              alert("Approval request submitted, thank you");
+              $("#approvalRequestForm").empty();
+            }
+
+          },
+
+          error: function (err) {
+            console.log("Record for was not found for the ID you provided");
+            alert('No Record was found for the ID you provided');
+          }
+
+
+
+        });
+
+      });
+
+    });
 
   </script>
 </head>
+
 <body style="background-color: rgb(242, 249, 255)">
 
-<nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
-  <a class="navbar-brand" href="/emp/login" style="color: white">Employer Inc.</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</nav>
-<br><br><br>
+  <nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
+    <a class="navbar-brand" href="/emp/login" style="color: white">Employer Inc.</a>
+    <span class="navbar-text">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"></button>
+      <span>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">View
+          Logs</button>
+      </span>
+  </nav>
 
-<div class ="centerali">
-  <br>
-      <div class="container">
+  <br><br><br>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Logs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
+            src="http://localhost:1337/logs" frameborder="0">
+          </iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="centerali">
+    <br>
+    <div class="container">
       <div class="row">
 
         <div class="col-sm-6">
@@ -120,27 +157,30 @@ $("button").on('click',   function (e) {
               <div class="card-body">
                 <h5 class="card-title">Loan Confirmation Form</h5>
                 <p class="card-text">Fill up the form for employer to provide confirmation</p>
-                
+
                 <div class="input-group">
-                    <input type="text" name="empid" id="empid" placeholder="Employee ID" class="form-control" required>
-                  </div><br>
+                  <input type="text" name="empid" id="empid" placeholder="Employee ID" class="form-control" required>
+                </div><br>
 
                 <div class="input-group">
                   <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
                 </div><br>
-                
+
                 <div class="input-group">
-                  <input type="text" name="refID" id="refID" placeholder="Brokers Reference ID" class="form-control" required>
+                  <input type="text" name="refID" id="refID" placeholder="Brokers Reference ID" class="form-control"
+                    required>
                 </div><br>
                 <div class="input-group">
-                    <input type="text" name="brokerURL" id="refbrokerURLID" placeholder="Brokers URL" class="form-control" required>
-                  </div><br>
-                <button class="btn btn-success"  type="button" >Submit</button>
+                  <input type="text" name="brokerURL" id="refbrokerURLID" placeholder="Brokers URL" class="form-control"
+                    required>
+                </div><br>
+                <button class="btn btn-success" type="button">Submit</button>
               </div>
               <div class="card-footer text-muted"><strong>© Employer Inc. 2019</div>
             </div>
           </form>
         </div>
-</div>
+      </div>
 </body>
+
 </html>

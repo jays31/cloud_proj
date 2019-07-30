@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Employer Inc. | Home</title>
   <meta charset="utf-8">
@@ -8,15 +9,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  
+
   <style>
-    .col-sm-6
-      {
-        margin: 0 auto;
-        float : none;
-      }
-    .colo{
+    .col-sm-6 {
+      margin: 0 auto;
+      float: none;
+    }
+
+    .colo {
       background-color: rgb(186, 58, 75);
+    }
+
+    .modal-lg {
+      max-width: 50% !important;
+    }
+
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
     }
   </style>
   <script>
@@ -28,12 +38,12 @@
         var brokrefID = $("#brokrefID").val();
         var mlsId = $("#mlsid").val();
 
-        $.post("https://cloud-grp-10.azurewebsites.net/RErealestateController/createAppraisalRequest", {
-            submitted_firstname: firstName,
-            submitted_lastname: lastName,
-            submitted_mlsId: mlsId,
-            submitted_mortId: brokrefID
-          },
+        $.post("http://localhost:1337/RErealestateController/createAppraisalRequest", {
+          submitted_firstname: firstName,
+          submitted_lastname: lastName,
+          submitted_mlsId: mlsId,
+          submitted_mortId: brokrefID
+        },
 
           function (data, status) {
             var appStatus = data['regSuccess'];
@@ -43,19 +53,42 @@
     });
   </script>
 </head>
+
 <body style="background-color: rgb(255, 245, 247)">
 
-<nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
-  <a class="navbar-brand" href="/realestate/rehome" style="color: white">Real Estate Inc.</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</nav>
-<br><br><br>
-
-<div class ="centerali">
-  <br>
-      <div class="container">
+  <nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
+    <a class="navbar-brand" href="/realestate/rehome" style="color: white">Real Estate Inc.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+      <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">View
+        Logs</button>
+    </button>
+  </nav>
+  <br><br><br>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Logs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
+            src="http://localhost:1337/logs" frameborder="0">
+          </iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="centerali">
+    <br>
+    <div class="container">
       <div class="row">
 
         <div class="col-sm-6">
@@ -64,29 +97,32 @@
               <div class="card-body">
                 <h5 class="card-title">Appraisal Form</h5>
                 <p class="card-text">For your Real Estate</p>
-                
-                <div class="input-group">
-                    <input type="text" name="fname" id="firstName" placeholder="First Name" class="form-control" required>
-                  </div><br>
 
-                  <div class="input-group">
-                    <input type="text" name="lname" id="lastName" placeholder="Last Name" class="form-control" required>
-                  </div><br>
-
-                  <div class="input-group">
-                        <input type="number" step="1" min="1" name="mlsid" id="mlsid" placeholder="MLs_ID" class="form-control" required/>
-                      </div><br>
                 <div class="input-group">
-                    <input type="text" name="brokrefID" id="brokrefID" placeholder="Brokers Reference ID" class="form-control" required>
-                    </div><br>
+                  <input type="text" name="fname" id="firstName" placeholder="First Name" class="form-control" required>
+                </div><br>
+
+                <div class="input-group">
+                  <input type="text" name="lname" id="lastName" placeholder="Last Name" class="form-control" required>
+                </div><br>
+
+                <div class="input-group">
+                  <input type="number" step="1" min="1" name="mlsid" id="mlsid" placeholder="MLs_ID"
+                    class="form-control" required />
+                </div><br>
+                <div class="input-group">
+                  <input type="text" name="brokrefID" id="brokrefID" placeholder="Brokers Reference ID"
+                    class="form-control" required>
+                </div><br>
 
                 <button class="btn btn-danger" id="checkMortStatus" type="button">Submit</button>
+              </div>
+              <div class="card-footer text-muted"><a id="feedback"></a></div>
+              <div class="card-footer text-muted"><strong>© Realestate Inc. 2019</div>
             </div>
-            <div class="card-footer text-muted"><a id="feedback"></a></div>
-            <div class="card-footer text-muted"><strong>© Realestate Inc. 2019</div>
-          </div>
           </form>
         </div>
-</div>
+      </div>
 </body>
+
 </html>

@@ -5,6 +5,7 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+var request = require('request');
 const log4js = require('log4js');
 log4js.configure({
   appenders: {
@@ -21,6 +22,7 @@ log4js.configure({
   }
 });
 const logger = log4js.getLogger('mortgageBroker');
+console.log(logger);
 
 module.exports = {
 
@@ -41,6 +43,10 @@ module.exports = {
 
     // Logging code
     logger.info('Mortgage Request Received: Inserting into database begins..');
+    var log_a = 'Mortgage Request Received: Inserting into database begins..';
+    logger.info(log_a);
+    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_a) });
+
 
     BrokerMortgage.create({
       userName: userName,
@@ -69,6 +75,10 @@ module.exports = {
         });
       });
     logger.info('Mortgage Request Submitted: Inserting into database ends..');
+    var log_b = 'Mortgage Request Submitted: Inserting into database ends..';
+    logger.info(log_b);
+    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_b) });
+
   },
 
   employerApprovalUpdate_805: function (req, res) {
@@ -78,6 +88,9 @@ module.exports = {
     var employerConfirmationStatus = req.body.approvalStatus;
 
     logger.info('Initiate Employer Approval Status Update, received from employer: begins..');
+    var log_c = 'Initiate Employer Approval Status Update, received from employer: begins..';
+    logger.info(log_c);
+    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_c) });
 
     BrokerMortgage.update({
       id: mortId
@@ -88,9 +101,15 @@ module.exports = {
     }).exec(function (err) {
       if (err) {
         sails.log("could not update record");
+        var log_d = 'could not update record';
+        logger.info(log_d);
+        request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_d) });
       }
     });
     logger.info('Initiate Employer Approval Status Update, received from employer: ends..');
+    var log_e = 'Initiate Employer Approval Status Update, received from employer: ends..';
+    logger.info(log_e);
+    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_e) });
   },
 
   updateBrokerRE: function (req, res) {
@@ -99,6 +118,10 @@ module.exports = {
     var status = "Approved";
 
     logger.info('Initiate Real-estate Appraisal Status Update , received from Real-estate Broker: begins..');
+    var log_f = 'Initiate Real-estate Appraisal Status Update , received from Real-estate Broker: begins..';
+    logger.info(log_f);
+    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_f) });
+
     BrokerMortgage.update({
       id: mortID
     }).set({
@@ -107,9 +130,15 @@ module.exports = {
     }).exec(function (err) {
       if (err) {
         sails.log("could not update appraisal record");
+        var log_g = 'could not update appraisal record';
+        logger.info(log_g);
+        request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_g) });
       }
     });
     logger.info('Initiate Real-estate Appraisal Status Update , received from Real-estate Broker: ends..');
+    var log_h = 'Initiate Real-estate Appraisal Status Update , received from Real-estate Broker: ends..';
+    logger.info(log_h);
+    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_h) });
   },
 
 
@@ -118,6 +147,10 @@ module.exports = {
     var IncStatus = req.body.incstatus;
 
     logger.info('Initiate Insurance Status Update, received from Insurance Agent: begins..');
+    var log_i = 'Initiate Insurance Status Update, received from Insurance Agent: begins..';
+    logger.info(log_i);
+    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_i) });
+
     BrokerMortgage.update({
       id: mortId
     }).set({
@@ -125,8 +158,14 @@ module.exports = {
     }).exec(function (err) {
       if (err) {
         sails.log("could not update record");
+        var log_j = 'could not update record';
+        logger.info(log_j);
+        request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_j) });
       }
     });
     logger.info('Initiate Insurance Status Update, received from Insurance Agent: ends..');
+    var log_k = 'Initiate Insurance Status Update, received from Insurance Agent: ends..';
+    logger.info(log_k);
+    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_k) });
   },
 };

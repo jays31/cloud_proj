@@ -1,4 +1,4 @@
-FROM node:7
+FROM node:10.16.0
 RUN npm install sails -g
 RUN npm install sails-mysql -g
 RUN npm install log4js -g
@@ -9,4 +9,4 @@ COPY ["package.json","package-lock.json*","npm-shrinkwrap.json*","./"]
 RUN npm install
 COPY . .
 EXPOSE 1337
-CMD sails lift --drop
+CMD sails lift
