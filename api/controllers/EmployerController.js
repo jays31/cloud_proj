@@ -21,13 +21,13 @@ module.exports = {
     sails.log(userpassword);
     var log_l = userpassword;
     logger.info(log_l);
-    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_l) });
+    request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_l) });
 
     var passdecryptFromUser = (CryptoJS.AES.decrypt(userpassword.toString(), 'quick Oats')).toString(CryptoJS.enc.Utf8);
     logger.info('Employee Login Begins..');
     var log_m = 'Employee Login Begins..';
     logger.info(log_m);
-    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_m) });
+    request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_m) });
 
     Employer.find().where({
       employeeEmail: useremail
@@ -36,7 +36,7 @@ module.exports = {
         sails.log("ended in error");
         var log_n = 'ended in error';
         logger.info(log_n);
-        request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_n) });
+        request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_n) });
 
         res.send({
           error: true
@@ -52,7 +52,7 @@ module.exports = {
         sails.log("email does not exist")
         var log_o = 'email does not exist';
         logger.info(log_o);
-        request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_o) });
+        request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_o) });
       }
 
       if (passdecrypt === passdecryptFromUser) {
@@ -67,7 +67,7 @@ module.exports = {
       logger.info('Employee Login Begins..');
       var log_p = 'Employee Login Begins..';
       logger.info(log_p);
-      request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_p) });
+      request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_p) });
     });
   },
 
@@ -77,7 +77,7 @@ module.exports = {
     logger.info('Employer Approval Begins..');
     var log_q = 'Employer Approval Begins..';
     logger.info(log_q);
-    request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_q) });
+    request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_q) });
 
     Employer.find().where({
       employeeEmail: useremail
@@ -86,7 +86,7 @@ module.exports = {
         sails.log("ended in error");
         var log_r = 'ended in error';
         logger.info(log_r);
-        request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_r) });
+        request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_r) });
 
         res.send({
           error: 'User was not found.'
@@ -109,7 +109,7 @@ module.exports = {
       logger.info('Employer Approval Ends..');
       var log_s = 'Employer Approval Ends..';
       logger.info(log_s);
-      request.get({ url: 'http://localhost:1337/logs/create?log=' + (log_s) });
+      request.get({ url: 'https://cloud-grp-10.azurewebsites.net/logs/create?log=' + (log_s) });
     });
   },
 };

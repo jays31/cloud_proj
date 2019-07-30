@@ -57,7 +57,7 @@
         encryptedPass = encryptedPass.toString();
         $.ajax({
 
-          url: "http://localhost:1337/EmployerController/userLogin_805",
+          url: "https://cloud-grp-10.azurewebsites.net/EmployerController/userLogin_805",
           type: 'post',
           data: { employeeEmail: useremail, employeepwd: encryptedPass },
 
@@ -72,7 +72,7 @@
 
             if (data.Success) {
 
-              window.location = "http://localhost:1337/emp/empconfirmation";
+              window.location = "https://cloud-grp-10.azurewebsites.net/emp/empconfirmation";
 
             }
 
@@ -125,7 +125,7 @@
         </div>
         <div class="modal-body">
           <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
-            src="http://localhost:1337/logs" frameborder="0">
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
           </iframe>
         </div>
         <div class="modal-footer">

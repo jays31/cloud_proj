@@ -44,7 +44,7 @@
         var insuredValue = $("#insuredValue").val();
         var deductibleValue = $("#deductibleValue").val();
 
-        $.post("http://localhost:1337/InsuranceController/updateInsurance", {
+        $.post("https://cloud-grp-10.azurewebsites.net/InsuranceController/updateInsurance", {
           submitted_mlsid: incmlsid,
           submitted_mortid: icmortid,
           submitted_firstname: custFname,
@@ -57,7 +57,7 @@
           function (data, status) {
             if (data.Success) {
               $.ajax({
-                url: "http://localhost:1337/BrokerMortgageController/updateBrokerINC",
+                url: "https://cloud-grp-10.azurewebsites.net/BrokerMortgageController/updateBrokerINC",
                 type: 'POST',
                 data: { mortId: icmortid, incstatus: 'Approved' }
               });
@@ -98,7 +98,7 @@
         </div>
         <div class="modal-body">
           <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
-            src="http://localhost:1337/logs" frameborder="0">
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
           </iframe>
         </div>
         <div class="modal-footer">

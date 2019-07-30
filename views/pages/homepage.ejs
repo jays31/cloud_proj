@@ -55,7 +55,7 @@
 
     $(document).ready(function () {
       $("#apply4Mortgage").click(function () {
-        if ($(("#mortgage" == null) || ("#fname" == null) || ("#lname" == null) || ("#address" == null) || ("#cname" == null) || ("#email" == null) || ("#phone" === null))) {
+        if ($(("#mortgage" == null) || ("#fname" == null) || ("#lname" == null) || ("#address" == null) || ("#cname" == null) || ("#email_res" == null) || ("#phone" === null))) {
           $("#feedback").html("Incomplete form!");
         }
 
@@ -65,12 +65,12 @@
         var form_lastname = $("#lname").val();
         var form_address = $("#address").val();
         var form_employer = $("#cname").val();
-        var form_email = $("#email").val();
+        var form_email = $("#email_res").val();
         var form_phone = $("#phone").val();
         var form_amount = $("#mortgage").val();
         var form_mlsId = $("#mls_id").val();
 
-        $.post("http://localhost:1337/BrokerMortgageController/createMortgageRequest", {
+        $.post("https://cloud-grp-10.azurewebsites.net/BrokerMortgageController/createMortgageRequest", {
           submitted_username: form_username,
           submitted_password: form_password,
           submitted_firstname: form_firstname,
@@ -86,7 +86,7 @@
           function (data, status) {
             var appStatus = data['regSuccess'];
             var request = new XMLHttpRequest()
-            request.open('GET', 'http://localhost:1337/BrokerMortgage/find?employeeEmail=' + form_email, true)
+            request.open('GET', 'https://cloud-grp-10.azurewebsites.net/BrokerMortgage/find?employeeEmail=' + form_email, true)
             request.onload = function () {
               var data = JSON.parse(this.response)
               data.forEach(element => {
@@ -125,7 +125,7 @@
         </div>
         <div class="modal-body">
           <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
-            src="http://localhost:1337/logs" frameborder="0">
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
           </iframe>
         </div>
         <div class="modal-footer">
@@ -169,7 +169,7 @@
                 </div><br>
 
                 <div class="input-group">
-                  <input type="email" name="email" id="email" placeholder="Company Email" class="form-control"
+                  <input type="email" name="email_res" id="email_res" placeholder="Company Email" class="form-control"
                     required />
                 </div><br>
 
@@ -177,7 +177,6 @@
                   <input type="number" min="1000000000" max="9999999999" step="1" name="phone" id="phone"
                     placeholder="Phone Number" class="form-control" required />
                 </div><br>
-
 
                 <div class="input-group">
                   <div class="input-group-prepend">

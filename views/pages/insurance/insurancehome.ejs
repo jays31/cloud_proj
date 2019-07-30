@@ -39,14 +39,14 @@
         var incmortid = $("#incmortid").val();
         $.ajax({
 
-          url: "http://localhost:1337/InsuranceController/findrecord",
+          url: "https://cloud-grp-10.azurewebsites.net/InsuranceController/findrecord",
           type: 'POST',
           data: { ins_MortID: incmortid },
           success: function (data) {
             //console.log(data)
             if (data.Success) {
 
-              //window.location = "http://localhost:1337/insurance/info";
+              //window.location = "https://cloud-grp-10.azurewebsites.net/insurance/info";
 
             }
             else {
@@ -90,7 +90,7 @@
         </div>
         <div class="modal-body">
           <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
-            src="http://localhost:1337/logs" frameborder="0">
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
           </iframe>
         </div>
         <div class="modal-footer">

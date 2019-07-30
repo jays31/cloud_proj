@@ -35,14 +35,14 @@
         var username = $("#re_email").val();
         var password = $("#re_pwd").val();
         $.ajax({
-          url: 'http://localhost:1337/re_users/find',
+          url: 'https://cloud-grp-10.azurewebsites.net/re_users/find',
           method: 'GET',
           data: { reEmail: username, rePassword: password },
           dataType: 'json',
           success: function (response) {
             if (null != response && response.length > 0) {
               console.log("Login Successful");
-              window.location = "http://localhost:1337/realestate/appraisalinfo";
+              window.location = "https://cloud-grp-10.azurewebsites.net/realestate/appraisalinfo";
             }
             else {
               console.log("Invalid Login");
@@ -83,7 +83,7 @@
         </div>
         <div class="modal-body">
           <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
-            src="http://localhost:1337/logs" frameborder="0">
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
           </iframe>
         </div>
         <div class="modal-footer">

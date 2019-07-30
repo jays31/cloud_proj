@@ -56,7 +56,7 @@
     function checkStatus() {
       var id = $("#wref").val();
       var request = new XMLHttpRequest()
-      request.open('GET', 'http://localhost:1337/BrokerMortgage/find?id=' + id, true)
+      request.open('GET', 'https://cloud-grp-10.azurewebsites.net/BrokerMortgage/find?id=' + id, true)
       request.onload = function () {
         var data = JSON.parse(this.response)
         if (!$.trim(data)) {
@@ -95,7 +95,7 @@
         </div>
         <div class="modal-body">
           <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
-            src="http://localhost:1337/logs" frameborder="0">
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
           </iframe>
         </div>
         <div class="modal-footer">
