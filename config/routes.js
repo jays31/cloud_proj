@@ -20,10 +20,28 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  '/login': { view: 'pages/login'},
-  '/status': { view: 'pages/status'}
-
-
+  '/login': { view: 'pages/login' },
+  '/status': { view: 'pages/status' },
+  '/emp/empconfirmation': { view: 'pages/emp/empconfirmation' },
+  '/emp/login': { view: 'pages/emp/emplogin' },
+  '/realestate/appraisalrequest': { view: 'pages/realestate/appraisalrequest' },
+  '/realestate/rehome': { view: 'pages/realestate/rehome' },
+  '/realestate/relogin': { view: 'pages/realestate/relogin' },
+  '/realestate/appraisalinfo': { view: 'pages/realestate/appraisalinfo' },
+  '/insurance/home': { view: 'pages/insurance/insurancehome' },
+  '/BrokerMortgageController/createMortgageRequest': 'BrokerMortgageController.createMortgageRequest',
+  '/EmployerController/userLogin_805': 'EmployerController.userLogin_805',
+  '/EmployerController/approvalRequest_805': 'EmployerController.approvalRequest_805',
+  '/BrokerMortgageController/employerApprovalUpdate_805': 'BrokerMortgageController.employerApprovalUpdate_805',
+  '/RErealestateController/createAppraisalRequest': 'RErealestateController.createAppraisalRequest',
+  '/RErealestateController/updateAppraisalValue_805': 'RErealestateController.updateAppraisalValue_805',
+  '/InsuranceController/insertAppraisalVal_Ins': 'InsuranceController.insertAppraisalVal_Ins',
+  '/insurance/info': { view: 'pages/insurance/insuranceInfo' },
+  '/InsuranceController/updateInsurance': 'InsuranceController.updateInsurance',
+  '/BrokerMortgageController/updateBrokerINC': 'BrokerMortgageController.updateBrokerINC',
+  '/BrokerMortgageController/updateBrokerRE': 'BrokerMortgageController.updateBrokerRE',
+  '/log': { view: 'pages/log' },
+  'post /create': 'EmailController.create',
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

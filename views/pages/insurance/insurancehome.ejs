@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Employer Inc. | Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <style>
+    .col-sm-6 {
+      margin: 0 auto;
+      float: none;
+    }
+
+    .colo {
+      background-color: rgb(29, 112, 58);
+    }
+
+    .modal-lg {
+      max-width: 50% !important;
+    }
+
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+  </style>
+
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+      $("#incFindMort").on('click', function (e) {
+        //alert ("button was clicked");
+
+        var incmortid = $("#incmortid").val();
+        $.ajax({
+
+          url: "https://cloud-grp-10.azurewebsites.net/InsuranceController/findrecord",
+          type: 'POST',
+          data: { ins_MortID: incmortid },
+          success: function (data) {
+            //console.log(data)
+            if (data.Success) {
+
+              //window.location = "https://cloud-grp-10.azurewebsites.net/insurance/info";
+
+            }
+            else {
+              alert("No Such Record");
+            }
+          },
+          error: function (err) {
+            alert('Details Incorrect');
+          }
+
+        });
+
+      });
+
+    });
+
+  </script>
+
+</head>
+
+<body style="background-color: rgb(245, 255, 248)">
+
+  <nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
+    <a class="navbar-brand" href="/insurance/home" style="color: white">Insurance Inc.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">View
+      Logs</button>
+  </nav>
+  <br><br><br>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Logs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
+          </iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="centerali">
+    <br>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-sm-6">
+          <form>
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">Insurance</h5>
+                <p class="card-text">Insurance</p>
+
+                <div class="input-group">
+                  <input type="text" name="incmortid" id="incmortid" placeholder="Mortgage ID" class="form-control"
+                    required>
+                </div><br>
+                <button class="btn btn-success" id="incFindMort" type="button">Find</button>
+              </div>
+              <div class="card-footer text-muted"><strong>© Insurance Inc. 2019</div>
+            </div>
+          </form>
+        </div>
+      </div>
+</body>
+
+</html>

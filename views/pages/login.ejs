@@ -1,51 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Warrior Mortgage</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>    
-    <style type="text/css">
-      nav {
-        text-align: center;
-        height: 75px;
-      }
-      footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%
-      }
-        body, html {
-        height: 100%;
-      }
-      .bg { 
-        /* The image used */
-        background-image: url("https://i0.wp.com/lilar.com/wp-content/uploads/2016/10/Savin-NY-Website-Background-Web.jpg?ssl=1");
 
-        /* Full height */
-        height: 100%; 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Warrior Mortgage</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      .col-sm-6{
-        float: none;
-        margin: 0 auto;
-      }
-    </style>
+  <style type="text/css">
+    nav {
+      text-align: center;
+      height: 75px;
+    }
 
-  </head>
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%
+    }
 
-  <body>
+    body,
+    html {
+      height: 100%;
+    }
 
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">Warrior Mortgage</a>
-    </nav>
+    .bg {
+      /* The image used */
+      background-image: url("https://i0.wp.com/lilar.com/wp-content/uploads/2016/10/Savin-NY-Website-Background-Web.jpg?ssl=1");
 
-    <br><br>
-    <div class="bg">
+      /* Full height */
+      height: 100%;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .col-sm-6 {
+      float: none;
+      margin: 0 auto;
+    }
+
+    .modal-lg {
+      max-width: 50% !important;
+    }
+
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+  </style>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#mortgageLogin").click(function () {
+        var username = $("#user_id").val();
+        var password = $("#user_pass").val();
+        $.ajax({
+          url: 'https://cloud-grp-10.azurewebsites.net/BrokerMortgage/find',
+          method: 'GET',
+          data: {
+            userName: username,
+            password: password
+          },
+          dataType: 'json',
+          success: function (response) {
+            if (null != response && response.length > 0) {
+              window.location = "https://cloud-grp-10.azurewebsites.net/status";
+            } else {
+              alert('Invalid Login');
+            }
+          },
+          error: function (err) {
+            console.log("Please check your input");
+            alert('Please check your input...');
+          }
+        });
+      });
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Warrior Mortgage</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">View
+      Logs</button>
+  </nav>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Logs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
+          </iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="bg">
     <div class="container">
       <div class="row">
 
@@ -56,24 +122,35 @@
               <div class="card-body">
 
                 <div class="input-group">
-                  <input type="text" name="user_id" id="user_id" placeholder="User ID" class="form-control" required/>&ensp;&ensp;
+                  <input type="text" name="user_id" id="user_id" placeholder="User Name" class="form-control"
+                    required />&ensp;&ensp;
                 </div><br>
 
                 <div class="input-group">
-                  <input type="text" name="user_pass" id="user_pass" placeholder="Password" class="form-control" required/>&ensp;&ensp;
+                  <input type="password" name="user_pass" id="user_pass" placeholder="Password" class="form-control"
+                    required />&ensp;&ensp;
                 </div><br>
-                
+
               </div>
               <div class="card-footer text-muted">
-                  <button class="btn btn-success" id="mortgageLogin" type="button">Submit</button>
-                </div>
+                <button class="btn btn-success" id="mortgageLogin" type="button">Submit</button>
+              </div>
             </div>
           </form>
         </div>
 
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>

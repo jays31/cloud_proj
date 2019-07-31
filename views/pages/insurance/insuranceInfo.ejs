@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Employer Inc. | Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <style>
+    .col-sm-6 {
+      margin: 0 auto;
+      float: none;
+    }
+
+    .colo {
+      background-color: rgb(29, 112, 58);
+    }
+
+    .modal-lg {
+      max-width: 50% !important;
+    }
+
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+  </style>
+
+
+  <script>
+
+    $(document).ready(function () {
+      $("#updateInsurance").click(function () {
+
+        var incmlsid = $("#incmlsid").val();
+        var icmortid = $("#icmortid").val();
+        var custFname = $("#custFname").val();
+        var custLname = $("#custLname").val();
+        var appraisalval = $("#appraisalval").val();
+        var insuredValue = $("#insuredValue").val();
+        var deductibleValue = $("#deductibleValue").val();
+
+        $.post("https://cloud-grp-10.azurewebsites.net/InsuranceController/updateInsurance", {
+          submitted_mlsid: incmlsid,
+          submitted_mortid: icmortid,
+          submitted_firstname: custFname,
+          submitted_lastname: custLname,
+          submitted_appvalue: appraisalval,
+          submitted_incvalue: insuredValue,
+          submitted_deduvalue: deductibleValue,
+        },
+
+          function (data, status) {
+            if (data.Success) {
+              $.ajax({
+                url: "https://cloud-grp-10.azurewebsites.net/BrokerMortgageController/updateBrokerINC",
+                type: 'POST',
+                data: { mortId: icmortid, incstatus: 'Approved', insuredValue: insuredValue, deductibleValue: deductibleValue }
+              });
+            }
+            else {
+              alert("There was an issue updating the appraisal value, contact the system admin");
+            }
+          });
+      });
+    });
+
+  </script>
+
+
+
+</head>
+
+<body style="background-color: rgb(245, 255, 248)">
+
+  <nav class="navbar navbar-expand-md colo navbar-dark fixed-top">
+    <a class="navbar-brand" href="/insurance/home" style="color: white">Insurance Inc.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">View
+      Logs</button>
+  </nav>
+  <br><br><br>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Logs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe id="inlineFrameExample" title="Inline Frame Example" width="600" height="400"
+            src="https://cloud-grp-10.azurewebsites.net/logs" frameborder="0">
+          </iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="centerali">
+    <br>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-sm-6">
+          <form>
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">Insurance</h5>
+                <p class="card-text">Insurance</p>
+
+                <div class="input-group">
+                  <input type="text" name="incmlsid" id="incmlsid" placeholder="MLSs ID" required class="form-control"
+                    required>
+                </div><br>
+
+                <div class="input-group">
+                  <input type="text" name="icmortid" id="incmortid" placeholder="Mortgage ID" required
+                    class="form-control" required>
+                </div><br>
+                <div class="input-group">
+                  <input type="text" name="custFname" id="custFname" placeholder="First Name" required
+                    class="form-control">
+                </div><br>
+                <div class="input-group">
+                  <input type="text" name="custLname" id="custLname" placeholder="Last Name" required
+                    class="form-control">
+                </div><br>
+                <div class="input-group">
+                  <input type="number" name="appraisalval" id="appraisalval" placeholder="Appraisal Value" required
+                    class="form-control" />
+                </div><br>
+                <div class="input-group">
+                  <input type="number" step="1" min="1" name="insuredValue" id="insuredValue"
+                    placeholder="Insured Value" required class="form-control" />
+                </div><br>
+                <div class="input-group">
+                  <input type="number" step="1" min="1" name="deductibleValue" id="deductibleValue"
+                    placeholder="Deductible Value" required class="form-control" />
+                </div><br>
+                <button class="btn btn-success" id="updateInsurance" type="button">Submit</button>
+              </div>
+              <div class="card-footer text-muted"><strong>© Insurance Inc. 2019</div>
+            </div>
+          </form>
+        </div>
+      </div>
+</body>
+
+</html>
